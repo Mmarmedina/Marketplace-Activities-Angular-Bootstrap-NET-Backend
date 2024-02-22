@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA_API", "SPRENCIA_API.csproj", "{58B83690-0F1B-4B5E-861C-6C3991D36D16}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{60851E7A-52A8-4C32-8BC2-9BA2F20B1A98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{58B83690-0F1B-4B5E-861C-6C3991D36D16} = {60851E7A-52A8-4C32-8BC2-9BA2F20B1A98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384F8B57-5955-46B6-855E-BD7406E5B56E}
