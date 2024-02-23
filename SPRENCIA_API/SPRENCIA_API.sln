@@ -9,25 +9,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Pre
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{0C710A8F-CB0E-4759-BE83-2218EC7F5720}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.Application", "..\SPRENCIA.Application\SPRENCIA.Application.csproj", "{D6FA20D2-8CE5-44F4-BFF2-56790137DD0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.Application", "..\SPRENCIA.Application\SPRENCIA.Application.csproj", "{D6FA20D2-8CE5-44F4-BFF2-56790137DD0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.Application.Contracts", "..\SPRENCIA.Application.Contracts\SPRENCIA.Application.Contracts.csproj", "{F06E3A63-568F-4D75-9F37-324432DEA212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.Application.Contracts", "..\SPRENCIA.Application.Contracts\SPRENCIA.Application.Contracts.csproj", "{F06E3A63-568F-4D75-9F37-324432DEA212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.Domain", "..\SPRENCIA.Domain\SPRENCIA.Domain.csproj", "{0E980396-D046-4948-8602-9E4CF3A9BDF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.Domain", "..\SPRENCIA.Domain\SPRENCIA.Domain.csproj", "{0E980396-D046-4948-8602-9E4CF3A9BDF0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{517D1161-D736-4A32-9015-D55FE5A96DB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infraestructure", "4 - Infraestructure", "{741C8235-CE41-48FB-8EFB-0333524AC666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.Infraestructure", "..\SPRENCIA.Infraestructure\SPRENCIA.Infraestructure.csproj", "{E4185C41-740F-4620-BD8B-5ADD4A95E639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.Infraestructure", "..\SPRENCIA.Infraestructure\SPRENCIA.Infraestructure.csproj", "{E4185C41-740F-4620-BD8B-5ADD4A95E639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.Infraestructure.Contracts", "..\SPRENCIA.Infraestructure.Contracts\SPRENCIA.Infraestructure.Contracts.csproj", "{82BD2779-991D-478C-9794-EA7FB33B233F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.Infraestructure.Contracts", "..\SPRENCIA.Infraestructure.Contracts\SPRENCIA.Infraestructure.Contracts.csproj", "{82BD2779-991D-478C-9794-EA7FB33B233F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - CrossCutting", "5 - CrossCutting", "{2805D976-F740-4A02-A650-710E3DB41181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.CrossCutting", "..\SPRENCIA.CrossCutting\SPRENCIA.CrossCutting.csproj", "{8456452E-A457-45A8-B579-771CB7532F9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.CrossCutting", "..\SPRENCIA.CrossCutting\SPRENCIA.CrossCutting.csproj", "{8456452E-A457-45A8-B579-771CB7532F9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPRENCIA.CrossCutting.Contracts", "..\SPRENCIA.CrossCutting.Contracts\SPRENCIA.CrossCutting.Contracts.csproj", "{72B237BE-5D4E-4DC1-98B8-E1ED94DEF267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPRENCIA.CrossCutting.Contracts", "..\SPRENCIA.CrossCutting.Contracts\SPRENCIA.CrossCutting.Contracts.csproj", "{72B237BE-5D4E-4DC1-98B8-E1ED94DEF267}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
