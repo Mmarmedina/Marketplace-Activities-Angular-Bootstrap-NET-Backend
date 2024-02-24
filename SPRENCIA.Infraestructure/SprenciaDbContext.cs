@@ -22,6 +22,27 @@ namespace SPRENCIA.Infraestructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            // MMM Relación N a M entre la tabla opiniones y tabla actividades.
+            // MMM Al intentar eliminar una actividad que tenga opiniones asociadas, se generará un error y no se permitirá la eliminación de la actividad hasta que las opiniones asociadas se eliminen o la relación se modifique.
+            // MMM Que en la tabla de opiniones, el campo ActivityId (FK) puede ser null (cuando la opinión sea de Sprencia no tendrá ActivityId asociado).
+            modelBuilder.Entity<Review>()
+              .HasOne(b => b.Activity)
+              .WithMany()
+              .HasForeignKey(b => b.ActivityId)
+              .IsRequired(false)
+              .OnDelete(DeleteBehavior.Restrict);
+
+            // MMM Relación M a M entre la tabla actividades y horarios (tabla intermedia).
+            modelBuilder.Entity<ActivitySchedule>()
+              .HasOne(sa => sa.Activity)
+              .WithMany(a => a.ActivitySchedules)
+              .HasForeignKey(sa => sa.ActivityId);
+
+            modelBuilder.Entity<ActivitySchedule>()
+              .HasOne(sa => sa.Schedule)
+              .WithMany(s => s.ActivitySchedules)
+              .HasForeignKey(sa => sa.ScheduleId);
+
         }
     }
 

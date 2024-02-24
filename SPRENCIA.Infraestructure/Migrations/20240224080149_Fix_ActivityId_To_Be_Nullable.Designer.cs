@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPRENCIA.Infraestructure;
 
@@ -11,9 +12,11 @@ using SPRENCIA.Infraestructure;
 namespace SPRENCIA.Infraestructure.Migrations
 {
     [DbContext(typeof(SprenciaDbContext))]
-    partial class SprenciaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240224080149_Fix_ActivityId_To_Be_Nullable")]
+    partial class Fix_ActivityId_To_Be_Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,9 +17,10 @@ namespace SPRENCIA.Domain.Models
         public string ReviewText { get; set; }
 
 
-        // MMM La propiedad ActividadId puede ser nula cuando la opinión sea sobre la empresa Sprencia y no sobre una actividad en particular.  
+        // MMM La propiedad ActividadId puede ser nula cuando la opinión sea sobre la empresa Sprencia y no sobre una actividad en particular.
+        
         [ForeignKey("ActivityId")]
         public int ActivityId { get; set; }
-        public Activity? Activity { get; set; }
+        public Activity Activity { get; set; }
     }
 }
