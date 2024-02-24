@@ -46,6 +46,29 @@ namespace SPRENCIA.Infraestructure.Migrations
                     b.ToTable("Activities");
                 });
 
+            modelBuilder.Entity("SPRENCIA.Domain.Models.ActivitySchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("ActivitySchedule");
+                });
+
             modelBuilder.Entity("SPRENCIA.Domain.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -76,38 +99,51 @@ namespace SPRENCIA.Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
-
                     b.ToTable("Schedules");
+                });
+
+            modelBuilder.Entity("SPRENCIA.Domain.Models.ActivitySchedule", b =>
+                {
+                    b.HasOne("SPRENCIA.Domain.Models.Activity", "Activity")
+                        .WithMany("ActivitySchedules")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SPRENCIA.Domain.Models.Schedule", "Schedule")
+                        .WithMany("ActivitySchedules")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("SPRENCIA.Domain.Models.Review", b =>
                 {
                     b.HasOne("SPRENCIA.Domain.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId");
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Activity");
                 });
 
-            modelBuilder.Entity("SPRENCIA.Domain.Models.Schedule", b =>
-                {
-                    b.HasOne("SPRENCIA.Domain.Models.Activity", null)
-                        .WithMany("Schedules")
-                        .HasForeignKey("ActivityId");
-                });
-
             modelBuilder.Entity("SPRENCIA.Domain.Models.Activity", b =>
                 {
-                    b.Navigation("Schedules");
+                    b.Navigation("ActivitySchedules");
+                });
+
+            modelBuilder.Entity("SPRENCIA.Domain.Models.Schedule", b =>
+                {
+                    b.Navigation("ActivitySchedules");
                 });
 #pragma warning restore 612, 618
         }

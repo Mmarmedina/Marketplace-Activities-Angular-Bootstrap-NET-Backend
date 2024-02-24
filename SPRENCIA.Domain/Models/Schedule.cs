@@ -21,8 +21,6 @@ namespace SPRENCIA.Domain.Models
         [Required]
         public ScheduleType Type { get; set; }
 
-        // public List<ActivitySchedule> Activities { get; set; }
-
         public List<ActivitySchedule> ActivitySchedules { get; set; }
 
 
