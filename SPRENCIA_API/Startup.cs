@@ -32,7 +32,7 @@ namespace SPRENCIA_API
                 cfg.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "1.0",
-                    Title = "Pacman Gestiones de reservas restaurante"
+                    Title = "Sprencia: MarketPlace Actividades Formativas para Seniors"
                 });
             });
         }
