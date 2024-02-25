@@ -12,5 +12,7 @@ namespace SPRENCIA.Infraestructure.Contracts
         // MMM Métodos de consulta, insercción, edición y borrado de actividades.
 
         Task<List<Activity>> GetAll();
+
+        Task<Activity> GetById(int id);
     }
 }

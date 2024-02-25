@@ -32,7 +32,7 @@ namespace SPRENCIA_API
                 cfg.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "1.0",
-                    Title = "Sprencia: MarketPlace Actividades Formativas para Seniors"
+                    Title = "Sprencia: Marketplace Actividades Formativas para Seniors"
                 });
             });
         }

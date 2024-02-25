@@ -24,5 +24,11 @@ namespace SPRENCIA.Application.Services
             var activities = await _activityRepository.GetAll();
             return activities;
         }
+
+        public async Task<Activity> GetById(int id)
+        {
+            var activity = await _activityRepository.GetById(id);
+            return activity;
+        }
     }
 }

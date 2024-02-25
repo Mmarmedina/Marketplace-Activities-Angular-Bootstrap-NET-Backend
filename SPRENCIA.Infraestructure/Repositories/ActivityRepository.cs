@@ -22,5 +22,12 @@ namespace SPRENCIA.Infraestructure.Repositories
             var activities = await _context.Activities.ToListAsync();
             return activities;
         }
+
+        public async Task<Activity?> GetById(int id)
+        {
+            var activity = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return activity;
+        }
+        
     }
 }

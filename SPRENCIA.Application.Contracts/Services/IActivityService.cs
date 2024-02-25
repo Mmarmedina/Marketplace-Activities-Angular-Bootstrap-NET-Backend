@@ -10,5 +10,6 @@ namespace SPRENCIA.Application.Contracts.Services
     public interface IActivityService
     {
         Task<List<Activity>> GetAll();
+        Task<Activity> GetById(int id);
     }
 }

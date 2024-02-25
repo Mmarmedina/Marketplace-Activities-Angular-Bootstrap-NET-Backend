@@ -20,6 +20,13 @@ namespace SPRENCIA_API.Controllers
             var activities = await _activityService.GetAll();
             return activities;
         }
-        
+
+        [HttpGet("{id}")]
+        public async Task<Activity> GetById(int id) 
+        {
+            var activity = await _activityService.GetById(id);
+            return activity;
+        }
+
     }
 }
