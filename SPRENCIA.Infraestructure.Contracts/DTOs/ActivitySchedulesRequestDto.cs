@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SPRENCIA.Domain.Models
+namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
     public enum ScheduleType
     {
@@ -13,16 +12,10 @@ namespace SPRENCIA.Domain.Models
         Afternoon,
         OnWeekend
     }
-    public class Schedule
+    public class ActivitySchedulesRequestDto
     {
-        [Key]
-        public int Id { get; set; }
+        // MMM Envío del frontend los distintos horarios de una actividad. Se usa en ActivityAddRequestDto.
 
-        [Required]
         public ScheduleType Type { get; set; }
-
-        public List<ActivitiesSchedules> ActivitySchedules { get; set; }
-
-
     }
 }

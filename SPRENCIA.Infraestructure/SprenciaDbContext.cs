@@ -33,12 +33,12 @@ namespace SPRENCIA.Infraestructure
               .OnDelete(DeleteBehavior.Restrict);
 
             // MMM Relación M a M entre la tabla actividades y horarios (tabla intermedia).
-            modelBuilder.Entity<ActivitySchedule>()
+            modelBuilder.Entity<ActivitiesSchedules>()
               .HasOne(sa => sa.Activity)
               .WithMany(a => a.ActivitySchedules)
               .HasForeignKey(sa => sa.ActivityId);
 
-            modelBuilder.Entity<ActivitySchedule>()
+            modelBuilder.Entity<ActivitiesSchedules>()
               .HasOne(sa => sa.Schedule)
               .WithMany(s => s.ActivitySchedules)
               .HasForeignKey(sa => sa.ScheduleId);

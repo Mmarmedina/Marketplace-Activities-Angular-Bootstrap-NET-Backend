@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SPRENCIA.Application.Contracts.Services;
 using SPRENCIA.Domain.Models;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA_API.Controllers
 {
@@ -28,5 +29,23 @@ namespace SPRENCIA_API.Controllers
             return activity;
         }
 
+        
+        [HttpPost]
+        [Route("AddActivity")]
+        public async Task<ActionResult> Create([FromBody] ActivityAddRequestDto newActivity)
+        {
+            var activityAdded = await _activityService.Create(newActivity);
+
+            if(activityAdded == null) 
+            {
+                return BadRequest("La petición no ha podido realizarse");
+            }
+            else
+            {
+                return Ok(activityAdded);
+            }
+
+        }
+     
     }
 }

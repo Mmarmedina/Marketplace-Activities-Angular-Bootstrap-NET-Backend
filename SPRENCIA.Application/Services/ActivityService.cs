@@ -2,6 +2,7 @@
 using SPRENCIA.Application.Contracts.Services;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,19 @@ namespace SPRENCIA.Application.Services
             var activity = await _activityRepository.GetById(id);
             return activity;
         }
+
+        public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
+        {
+            ActivityDto? activityAdded = null;
+
+            if (activityAdded != null)
+            {
+                activityAdded = await _activityRepository.Create(newActivity);
+            }
+            
+            return activityAdded;
+        }
+
+        
     }
 }

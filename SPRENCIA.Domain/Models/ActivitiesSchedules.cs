@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SPRENCIA.Domain.Models
 {
-    public class ActivitySchedule
+    public class ActivitiesSchedules
     {
         [Key]
         public int Id { get; set; }

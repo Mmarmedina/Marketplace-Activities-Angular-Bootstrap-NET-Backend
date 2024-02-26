@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,32 @@ namespace SPRENCIA.Infraestructure.Repositories
         {
             var activity = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
             return activity;
+        }
+
+        public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
+        {
+            ActivityAddRequestDto activityRequestDto = newActivity;
+
+            Activity activity = new Activity();
+            activity.Title = activityRequestDto.Title;
+            activity.Description = activityRequestDto.Description;
+            activity.Price = activityRequestDto.Price;
+            // MMM El horario no sé cómo ponerlo
+            // activity.ActivitySchedules = activityRequestDto.ActivitySchedules;
+             
+            var activityAdded = await _context.Activities.AddAsync(activity);
+            _context.SaveChanges();
+
+            ActivityDto ActivityDto = new ActivityDto();
+            ActivityDto.Id = activityAdded.Entity.Id;
+            ActivityDto.Title = activityAdded.Entity.Title;
+            ActivityDto.Description = activityAdded.Entity.Description;
+            ActivityDto.Price = activityAdded.Entity.Price;
+            // MMM Revisar cómo devuelve al frontend horarios?
+            // ActivityDto.ActivitySchedules = activityAdded.Entity.ActivitySchedules; 
+
+            return ActivityDto;
+          
         }
         
     }
