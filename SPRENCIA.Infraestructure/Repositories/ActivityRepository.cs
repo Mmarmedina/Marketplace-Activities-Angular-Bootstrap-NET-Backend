@@ -55,6 +55,18 @@ namespace SPRENCIA.Infraestructure.Repositories
             return ActivityDto;
           
         }
-        
+
+        public async Task<bool> DeleteById(int id)
+        {
+            var activityDeleted = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (activityDeleted != null)
+            {
+                _context.Activities.Remove(activityDeleted);
+                _context.SaveChanges();
+                return true;
+            }
+            
+            return false;
+        }
     }
 }

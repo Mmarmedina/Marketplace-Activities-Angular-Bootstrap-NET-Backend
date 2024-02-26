@@ -1,4 +1,5 @@
-﻿using SPRENCIA.Domain.Models;
+﻿using Microsoft.VisualBasic.FileIO;
+using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,8 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<Activity> GetById(int id);
 
         Task<ActivityDto> Create(ActivityAddRequestDto newActivity);
+
+        Task<bool> DeleteById(int id);
+
     }
 }

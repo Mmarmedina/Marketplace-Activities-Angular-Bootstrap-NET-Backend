@@ -44,6 +44,16 @@ namespace SPRENCIA.Application.Services
             return activityAdded;
         }
 
-        
+        public async Task<bool> DeleteById(int id)
+        {
+            var activityDeleted = await _activityRepository.DeleteById(id);
+
+            if (activityDeleted == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
