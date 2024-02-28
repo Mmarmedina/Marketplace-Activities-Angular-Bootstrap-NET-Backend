@@ -20,18 +20,20 @@ namespace SPRENCIA.Infraestructure.Repositories
         }
         public async Task<List<Activity>> GetAll()
         {
-            var activities = await _context.Activities.ToListAsync();
+            List<Activity> activities = await _context.Activities.ToListAsync();
             return activities;
         }
 
         public async Task<Activity?> GetById(int id)
         {
-            var activity = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
+            Activity? activity = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
             return activity;
         }
 
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
+            
+            // MMM TODO: Sacarlo a un método a parte (Mappers)
             ActivityAddRequestDto activityRequestDto = newActivity;
 
             Activity activity = new Activity();
@@ -58,7 +60,7 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         public async Task<bool> DeleteById(int id)
         {
-            var activityDeleted = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
+            Activity? activityDeleted = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (activityDeleted != null)
             {
                 _context.Activities.Remove(activityDeleted);

@@ -18,15 +18,16 @@ namespace SPRENCIA_API.Controllers
         [HttpGet]
         public async Task<List<Activity>> GetAll()
         {
-            var activities = await _activityService.GetAll();
+            List<Activity> activities = await _activityService.GetAll();
             return activities;
         }
 
         // MMM ¿Aquí debería devolver no la actividad, sino un DTO que incluya la información de la actividad y también de la opinión asociada a la actividad para poder pintarla en la página detalle de la actividad?
         [HttpGet("{id}")]
-        public async Task<Activity> GetById(int id) 
+        public async Task<ActivityDto> GetById(int id) 
         {
-            var activity = await _activityService.GetById(id);
+            ActivityDto activity = await _activityService.GetById(id);
+            // MMM Crear una clase activityMapped
             return activity;
         }
 
@@ -35,7 +36,7 @@ namespace SPRENCIA_API.Controllers
         [Route("NewActivity")]
         public async Task<ActionResult> Create([FromBody] ActivityAddRequestDto newActivity)
         {
-            var activityAdded = await _activityService.Create(newActivity);
+            ActivityDto activityAdded = await _activityService.Create(newActivity);
 
             if(activityAdded == null) 
             {
@@ -63,7 +64,7 @@ namespace SPRENCIA_API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)
         {
-            var activityDeleted = await _activityService.DeleteById(id);
+            bool activityDeleted = await _activityService.DeleteById(id);
             if (activityDeleted != true)
             {
                 return BadRequest("La actividad no se ha podido eliminar de la base de datos.");

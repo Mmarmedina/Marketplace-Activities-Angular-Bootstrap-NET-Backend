@@ -1,5 +1,6 @@
 ﻿using SPRENCIA.Application.Contracts;
 using SPRENCIA.Application.Contracts.Services;
+using SPRENCIA.Application.Mappers;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
@@ -22,14 +23,22 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<Activity>> GetAll()
         {
-            var activities = await _activityRepository.GetAll();
+            List<Activity> activities = await _activityRepository.GetAll();
             return activities;
         }
 
-        public async Task<Activity> GetById(int id)
+        public async Task<ActivityDto> GetById(int id)
         {
-            var activity = await _activityRepository.GetById(id);
-            return activity;
+            // MMM Sin mapeo: Activity activity = await _activityRepository.GetById(id, activityDto);
+            // return activity;vo
+
+            // MMM Devolver activity DTO
+            // Crear un metodo en ActivityMapper que sea igual que el método de Cipri ClientDto, recibe una actividad de tipo Activity y tiene que devolver ActivityDto
+
+            Activity activity = await _activityRepository.GetById(id);
+            ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
+            return activityDto;
+            
         }
 
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
@@ -46,7 +55,7 @@ namespace SPRENCIA.Application.Services
 
         public async Task<bool> DeleteById(int id)
         {
-            var activityDeleted = await _activityRepository.DeleteById(id);
+            bool activityDeleted = await _activityRepository.DeleteById(id);
 
             if (activityDeleted == true)
             {
