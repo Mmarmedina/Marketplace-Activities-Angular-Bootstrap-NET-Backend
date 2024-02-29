@@ -14,8 +14,7 @@ namespace SPRENCIA.Application.Mappers
             activityDto.Title = activity.Title;
             activityDto.Description = activity.Description;
             activityDto.Price = activity.Price;
-
-            // Horarios y opiniones. 
+            activityDto.ReviewText = new ReviewDto { ReviewText = review.ReviewText };
 
             return activityDto;
 
