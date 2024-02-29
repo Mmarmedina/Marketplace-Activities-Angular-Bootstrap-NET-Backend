@@ -6,6 +6,7 @@ using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,9 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<Activity>> GetAll()
         {
+            // MMM Todas las actividades
             List<Activity> activities = await _activityRepository.GetAll();
+            ActivityDto activityDto = ActivityMapper.MapToActivityDto();
             return activities;
         }
 
@@ -38,6 +41,8 @@ namespace SPRENCIA.Application.Services
             Activity activity = await _activityRepository.GetById(id);
             ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
             return activityDto;
+
+            // MMM El front necesita un objeto con las actividades, las opiniones y los horarios. 
             
         }
 

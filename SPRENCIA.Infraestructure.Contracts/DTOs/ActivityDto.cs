@@ -9,14 +9,15 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
     public class ActivityDto
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
 
         public string Description { get; set; }
 
         public double Price { get; set; }
 
-        // public List<ActivitiesSchedules> ActivitySchedules { get; set; }
+        public ActivitiesSchedulesAndSchedules ActivitiesSchedulesAndSchedules { get; set; }
+
+        public ReviewDto ReviewText { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SPRENCIA.Domain.Models;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace SPRENCIA.Application.Contracts.Services
 {
     public interface IReviewService
     {
-        Task<List<Review>> GetAll();
+        // MMM Task<List<ReviewDto>> GetAll();
     }
 }
