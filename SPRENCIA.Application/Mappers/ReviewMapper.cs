@@ -5,17 +5,18 @@ namespace SPRENCIA.Application.Mappers
 {
     public class ReviewMapper
     {
-        /* public static List<ReviewDto> MapToReviewDto(List<Review> reviews)
+        /*public static List<ReviewDto> MapToReviewDto(List<Review> reviews)
         {
             ReviewDto reviewsDto = new List<ReviewDto>();
             
             foreach (Review review in reviews)
             {
                 ReviewDto reviewDto = ReviewMapper.MapToReviewDto(review);
+                reviewDto.Add(reviewDto);
             }
       
             return reviewsDto;
 
-        } */
+        }*/
     }
 }

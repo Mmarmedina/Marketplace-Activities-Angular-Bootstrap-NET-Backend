@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SPRENCIA.Application.Contracts\SPRENCIA.Application.Contracts.csproj" />
+    <ProjectReference Include="..\SPRENCIA.Application\SPRENCIA.Application.csproj" />
     <ProjectReference Include="..\SPRENCIA.Infraestructure.Contracts\SPRENCIA.Infraestructure.Contracts.csproj" />
   </ItemGroup>
 

@@ -13,6 +13,7 @@ namespace SPRENCIA.Infraestructure
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<ActivitiesSchedules> ActivitiesSchedules { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -16,9 +16,9 @@ namespace SPRENCIA_API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Activity>> GetAll()
+        public async Task<List<ActivityDto>> GetAll()
         {
-            List<Activity> activities = await _activityService.GetAll();
+            List<ActivityDto> activities = await _activityService.GetAll();
             return activities;
         }
 
@@ -27,11 +27,10 @@ namespace SPRENCIA_API.Controllers
         public async Task<ActivityDto> GetById(int id) 
         {
             ActivityDto activity = await _activityService.GetById(id);
-            // MMM Crear una clase activityMapped
             return activity;
         }
 
-        
+       
         [HttpPost]
         [Route("NewActivity")]
         public async Task<ActionResult> Create([FromBody] ActivityAddRequestDto newActivity)
@@ -48,18 +47,8 @@ namespace SPRENCIA_API.Controllers
             }
 
         }
+       
 
-        /* MMM Forma simplificada, pero tampoco funciona. No añade, lo toma como null.
-        [HttpPost]
-        [Route("AddActivity")]
-        public async Task<ActivityDto> Create([FromBody] ActivityAddRequestDto newActivity)
-        {
-            var activityAdded = await _activityService.Create(newActivity);
-            return activityAdded;
-        }
-        */
-
-        
         // MMM Me da error: hice restricción que no se borre actividad porque se quedan las opiniones sin las actividades asociadas. Además hay otros errores para ver en Swagger.
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)

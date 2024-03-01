@@ -1,14 +1,8 @@
-﻿using SPRENCIA.Application.Contracts;
-using SPRENCIA.Application.Contracts.Services;
+﻿using SPRENCIA.Application.Contracts.Services;
 using SPRENCIA.Application.Mappers;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SPRENCIA.Application.Services
 {
@@ -33,24 +27,24 @@ namespace SPRENCIA.Application.Services
         {
             // MMM Devolver activity DTO
             // Crear un metodo en ActivityMapper que sea igual que el método de Cipri ClientDto, recibe una actividad de tipo Activity y tiene que devolver ActivityDto
-
+            // MMM El front necesita un objeto con las actividades, las opiniones y los horarios. 
             Activity activity = await _activityRepository.GetById(id);
             ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
             return activityDto;
-
-            // MMM El front necesita un objeto con las actividades, las opiniones y los horarios. 
-            
         }
 
+        
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
+            // Activity activityAdded = await _activityRepository.Create(newActivity);
+
             ActivityDto? activityAdded = null;
 
-            if (activityAdded != null)
+            if (newActivity != null)
             {
                 activityAdded = await _activityRepository.Create(newActivity);
             }
-            
+
             return activityAdded;
         }
 
@@ -65,5 +59,7 @@ namespace SPRENCIA.Application.Services
 
             return false;
         }
+
+        
     }
 }

@@ -20,7 +20,7 @@ namespace SPRENCIA.Domain.Models
 
         [Required]
         public double Price { get; set; }
-        
+
         public List<ActivitiesSchedules> ActivitySchedules { get; set; }
 
     }

@@ -17,7 +17,8 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 
         public double Price { get; set; }
 
-   
+        // Falta la propiedad horarios 
+
         // MMM Aquí el frontend puede indicar que una actividad tiene varios horarios
 
         // public List<ActivitySchedulesRequestDto> ActivitySchedules { get; set; }

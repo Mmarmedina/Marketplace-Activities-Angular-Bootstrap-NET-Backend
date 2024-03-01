@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SPRENCIA.Application.Mappers;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SPRENCIA.Infraestructure.Repositories
 {
@@ -30,6 +27,9 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activity;
         }
 
+        
+
+      
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             
@@ -47,7 +47,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context.SaveChanges();
 
             ActivityDto ActivityDto = new ActivityDto();
-            ActivityDto.Id = activityAdded.Entity.Id;
             ActivityDto.Title = activityAdded.Entity.Title;
             ActivityDto.Description = activityAdded.Entity.Description;
             ActivityDto.Price = activityAdded.Entity.Price;
@@ -55,7 +54,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             // ActivityDto.ActivitySchedules = activityAdded.Entity.ActivitySchedules; 
 
             return ActivityDto;
-          
+
         }
 
         public async Task<bool> DeleteById(int id)
