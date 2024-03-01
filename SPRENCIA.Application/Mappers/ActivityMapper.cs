@@ -19,5 +19,7 @@ namespace SPRENCIA.Application.Mappers
             return activityDto;
 
         }
+
+        // MEter el método de las actividades. 
     }
 }

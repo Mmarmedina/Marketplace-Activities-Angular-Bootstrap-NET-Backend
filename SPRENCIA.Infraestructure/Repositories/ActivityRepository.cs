@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SPRENCIA.Application.Mappers;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
@@ -27,9 +26,24 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activity;
         }
 
-        
+        // Método create con mapeos
+        public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
+        {
+            // Se crea objeto actividad (almacenado en la variable activity) y se le asignan los valores insertados por el usuario en el frontend (ActivityAddRequestDto)
+            Activity activity = Mappers.ActivityMapper.MapToActivity(newActivity);
 
-      
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Activity> activityAdded = await _context.Activities.AddAsync(activity);
+            _context.SaveChanges();
+
+            // Actividad añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
+            ActivityDto activityDto = Mappers.ActivityMapper.MapToActivityDtoFromEntity(activityAdded.Entity);
+
+            return activityDto;
+
+        }
+
+        // Método create sin mapeos
+        /*
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             
@@ -55,7 +69,7 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return ActivityDto;
 
-        }
+        }*/
 
         public async Task<bool> DeleteById(int id)
         {

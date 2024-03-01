@@ -43,6 +43,10 @@ namespace SPRENCIA.Application.Services
             if (newActivity != null)
             {
                 activityAdded = await _activityRepository.Create(newActivity);
+                // Después de insertar la actividad tengo que insertar su relación con el horario. 
+                // El horario me tiene que venir en el actvityRequestDto.
+
+
             }
 
             return activityAdded;

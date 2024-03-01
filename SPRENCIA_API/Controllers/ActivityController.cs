@@ -47,8 +47,7 @@ namespace SPRENCIA_API.Controllers
             }
 
         }
-       
-
+      
         // MMM Me da error: hice restricción que no se borre actividad porque se quedan las opiniones sin las actividades asociadas. Además hay otros errores para ver en Swagger.
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)
