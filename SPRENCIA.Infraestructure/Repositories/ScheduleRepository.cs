@@ -14,11 +14,15 @@ namespace SPRENCIA.Infraestructure.Repositories
         {
             _context = dbcontext;
         }
-        public async Task<List<ActivitiesSchedulesAndSchedules>> GetAll()
+        public async Task<List<Schedule>> GetAll()
         {
-            // MMM Hacer una consulta de la tabla activities_schedules + schedules
+            // Hacer un método para recuperar todos los horarios
 
-            List<ActivitiesSchedulesAndSchedules> activitiesSchedulesAndSchedules = await _context.ActivitiesSchedules
+
+            // MMM TODO: Hacer una consulta de la tabla activities_schedules + schedules en ActivityScheduleRepository.cs
+
+            /*
+             List<Schedule> activitiesSchedulesAndSchedules = await _context.ActivitiesSchedules
                 .Join(
                     _context.Schedules,
                     sa => sa.Id,
@@ -28,6 +32,10 @@ namespace SPRENCIA.Infraestructure.Repositories
                 .ToListAsync();
 
             return activitiesSchedulesAndSchedules;
+             
+             */
+
+            return new List<Schedule> { };
         }
     }
 }

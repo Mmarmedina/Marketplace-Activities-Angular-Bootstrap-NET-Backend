@@ -19,7 +19,6 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
         public double Price { get; set; }
 
         // Añadir ScheduleDto 
-        public ActivitiesSchedulesAndSchedules ActivitiesSchedulesAndSchedules { get; set; }
 
         public ReviewDto ReviewText { get; set; }
     }

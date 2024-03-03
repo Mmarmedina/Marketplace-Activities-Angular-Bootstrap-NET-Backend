@@ -17,10 +17,8 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 
         public double Price { get; set; }
 
-        // Falta la propiedad horarios 
+        // TODO: el usuario puede marcar una opción o varias. Ver cómo se hace en el frontend (un selector no es) y con qué formato llega aquí, una lista de string?
 
-        // MMM Aquí el frontend puede indicar que una actividad tiene varios horarios
-
-        // public List<ActivitySchedulesRequestDto> ActivitySchedules { get; set; }
+        // public List<string> Schedule { get; set; }
     }
 }

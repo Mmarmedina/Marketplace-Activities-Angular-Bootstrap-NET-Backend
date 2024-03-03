@@ -15,7 +15,8 @@ namespace SPRENCIA.Application.Mappers
             activityDto.Description = activity.Description;
             activityDto.Price = activity.Price;
             activityDto.ReviewText = activityDto.ReviewText;
-            activityDto.ActivitiesSchedulesAndSchedules = activityDto.ActivitiesSchedulesAndSchedules;
+            // Hacerlo igual que las opiniones. 
+           // activityDto.ActivitiesSchedulesAndSchedules = activityDto.ActivitiesSchedulesAndSchedules;
             return activityDto;
 
         }
