@@ -1,11 +1,4 @@
-﻿using SPRENCIA.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SPRENCIA.Infraestructure.Contracts.DTOs
+﻿namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
     public class ActivityDto
     {
@@ -18,8 +11,8 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 
         public double Price { get; set; }
 
-        // Añadir ScheduleDto 
+        public ScheduleDto Schedule { get; set; }
 
-        public ReviewDto ReviewText { get; set; }
+        public ReviewDto Review { get; set; }
     }
 }

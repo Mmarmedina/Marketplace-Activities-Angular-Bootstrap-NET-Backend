@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SPRENCIA.Domain.Models;
+﻿using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Infraestructure.Mappers

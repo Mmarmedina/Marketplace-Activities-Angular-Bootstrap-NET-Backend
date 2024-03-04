@@ -1,11 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using SPRENCIA.Domain.Models;
+﻿using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SPRENCIA.Infraestructure.Contracts
 {
@@ -20,6 +14,8 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<ActivityDto> Create(ActivityAddRequestDto newActivity);
 
         Task<bool> DeleteById(int id);
+
+        // TODO: falta por hacer el método Update
 
     }
 }

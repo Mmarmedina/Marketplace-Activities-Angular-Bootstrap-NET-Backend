@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SPRENCIA.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SPRENCIA.Infraestructure
 {
@@ -13,7 +8,7 @@ namespace SPRENCIA.Infraestructure
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<ActivitiesSchedules> ActivitiesSchedules { get; set; }
+        public DbSet<ActivityScheduleDto> ActivitiesSchedules { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,12 +30,12 @@ namespace SPRENCIA.Infraestructure
             
 
             // MMM Relación M a M entre la tabla actividades y horarios (tabla intermedia).
-            modelBuilder.Entity<ActivitiesSchedules>()
+            modelBuilder.Entity<ActivityScheduleDto>()
               .HasOne(sa => sa.Activity)
               .WithMany(a => a.ActivitySchedules)
               .HasForeignKey(sa => sa.ActivityId);
 
-            modelBuilder.Entity<ActivitiesSchedules>()
+            modelBuilder.Entity<ActivityScheduleDto>()
               .HasOne(sa => sa.Schedule)
               .WithMany(s => s.ActivitySchedules)
               .HasForeignKey(sa => sa.ScheduleId);

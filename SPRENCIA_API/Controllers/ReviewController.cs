@@ -2,7 +2,7 @@
 
 namespace SPRENCIA_API.Controllers
 {
-    public class ReviewController : Controller
+    public class ReviewController : ControllerBase
     {
        
     }
