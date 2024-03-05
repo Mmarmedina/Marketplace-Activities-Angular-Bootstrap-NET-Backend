@@ -3,7 +3,9 @@
     public class ActivitiyScheduleDto
     {
         public int ActivityId { get; set; }
-        public List<string> ScheduleId { get; set; }
+
+        // MMM Es una lista de IDs de horarios, para representar que una actividad puede tener varios horarios asociados.
+        public List<int> ScheduleId { get; set; }
 
     }
 }

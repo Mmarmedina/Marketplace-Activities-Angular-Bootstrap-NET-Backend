@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SPRENCIA.Domain.Models
 {
@@ -21,7 +16,7 @@ namespace SPRENCIA.Domain.Models
         [Required]
         public double Price { get; set; }
 
-        public List<ActivityScheduleDto> ActivitySchedules { get; set; }
+        public List<ActivitiesSchedules> ActivitySchedules { get; set; }
 
     }
 }

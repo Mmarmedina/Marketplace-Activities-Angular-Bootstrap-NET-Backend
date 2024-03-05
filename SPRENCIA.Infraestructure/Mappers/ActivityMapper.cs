@@ -14,11 +14,8 @@ namespace SPRENCIA.Infraestructure.Mappers
             activity.Title = activityRequestDto.Title;
             activity.Description = activityRequestDto.Description;
             activity.Price = activityRequestDto.Price;
-            // TODO: falta horario.
-            // activity.ActivitySchedules = activityRequestDto.ActivitySchedules;?
-
+          
             return activity;
-
         }
 
         public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
@@ -28,27 +25,10 @@ namespace SPRENCIA.Infraestructure.Mappers
             ActivityDto.Title = activityAdded.Title;
             ActivityDto.Description = activityAdded.Description;
             ActivityDto.Price = activityAdded.Price;
-            // MMM TODO Revisar cómo devuelve al frontend horarios?
-            // ActivityDto.ActivitySchedules = activityAdded.ActivitySchedules; 
 
             return ActivityDto;
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-       
-    
+    }    
 }

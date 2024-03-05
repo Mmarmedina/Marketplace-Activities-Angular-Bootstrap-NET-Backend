@@ -6,10 +6,10 @@ namespace SPRENCIA.Application.Mappers
     {
         public static ActivitiyScheduleDto MapToActivitiesSchedulesDto(ActivityAddRequestDto newActivity, ActivityDto activityAdded)
         {
-            ActivitiyScheduleDto newSchedule = new ActivitiyScheduleDto();
-            newSchedule.ActivityId = activityAdded.Id;
-            newSchedule.ScheduleId = newActivity.Schedule;
-            return newSchedule;
+            ActivitiyScheduleDto activityScheduleDto = new ActivitiyScheduleDto();
+            activityScheduleDto.ActivityId = activityAdded.Id;
+            activityScheduleDto.ScheduleId = newActivity.Schedule;
+            return activityScheduleDto;
         }
         
     }

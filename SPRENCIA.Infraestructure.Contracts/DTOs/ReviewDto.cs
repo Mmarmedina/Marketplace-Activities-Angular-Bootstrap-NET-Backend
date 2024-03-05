@@ -6,6 +6,7 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
     {
       
         //MMM Dto salida de opiniones (datos para enviar al frontend). Se incluye como propiedad dentro de ActivityDto.
-        public string Review { get; set; }
+        public int Id { get; set; }
+        public string ReviewText { get; set; }
     }
 }

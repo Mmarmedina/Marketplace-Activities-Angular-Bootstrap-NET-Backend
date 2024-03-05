@@ -10,8 +10,7 @@ namespace SPRENCIA.Domain.Models
         [Required]
         public string Name { get; set; }
 
-        public List<ActivityScheduleDto> ActivitySchedules { get; set; }
-
+        public List<ActivitiesSchedules> ActivitySchedules { get; set; }
 
     }
 }

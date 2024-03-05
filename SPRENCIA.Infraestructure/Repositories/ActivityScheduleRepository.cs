@@ -14,27 +14,75 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context = dbcontext;
         }
 
-        public async Task<List<ActivitiyScheduleDto>> Create(ActivitiyScheduleDto activityScheduleDto)
+        public async Task<ActivitiyScheduleDto> Create(ActivitiyScheduleDto activityScheduleDto)
         {
             // Aquí hay que mapear el activityScheduleDto a objeto tipo entidad activities_schedule.
-            ActivitiesSchedules schedule = ScheduleMapper.MapToActivitiesSchedulesDtoFromEntity(activityScheduleDto);
+            ActivitiesSchedules activitySchedule = ScheduleMapper.MapToActivitySchedule(activityScheduleDto);
 
             // Se añade el objeto creado a BBDD
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivityScheduleDto> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(schedule);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivitiesSchedules> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(activitySchedule);
             _context.SaveChangesAsync();
 
             // Actividad/Horario añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
-            ActivitiyScheduleDto activitycheduleMapped = ScheduleMapper.MapToActivitiesSchedules(scheduleAdded);
+            ActivitiyScheduleDto activityScheduleMapped = ScheduleMapper.MapToActivitiyScheduleDto(scheduleAdded.Entity);
 
-            return activityscheduleMapped;
+            return activityScheduleMapped;
         }
 
-       
+
+
+
+
+
+
+
+
+        /* public async Task<List<ActivitiyScheduleDto>> Create(List<ActivitiyScheduleDto> activityScheduleDtos)
+        {
+            List<ActivitiyScheduleDto> activityScheduleMapped = new List<ActivitiyScheduleDto>();
+
+            foreach (ActivitiyScheduleDto activityScheduleDto in activityScheduleDtos)
+            {
+                // Mapear cada ActivitiyScheduleDto a un objeto ActivitiesSchedules
+                ActivitiesSchedules activitySchedule = ScheduleMapper.MapToActivitySchedule(activityScheduleDto);
+
+                // Añadir el objeto a la base de datos
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivitiesSchedules> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(activitySchedule);
+            }
+
+            _context.SaveChangesAsync();
+
+            // Actividad/Horario añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
+            List <ActivitiyScheduleDto> activityScheduleMapped = ScheduleMapper.MapToActivitiyScheduleDto(scheduleAdded.Entity);
+
+            return activityScheduleMapped;
+        }
+        
+        */
+        /*
+        public async Task<List<ActivitiyScheduleDto>> Create(ActivitiyScheduleDto activityScheduleDto)
+        {
+            // Aquí hay que mapear el activityScheduleDto a objeto tipo entidad activities_schedule.
+            ActivitiesSchedules activitySchedule = ScheduleMapper.MapToActivitySchedule(activityScheduleDto);
+
+            // Se añade el objeto creado a BBDD
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivitiesSchedules> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(activitySchedule);
+            _context.SaveChangesAsync();
+
+            // Actividad/Horario añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
+            List <ActivitiyScheduleDto> activityScheduleMapped = ScheduleMapper.MapToActivitiyScheduleDto(scheduleAdded.Entity);
+
+            return activityScheduleMapped;
+        }
+
+
+         
+
 
         // Se hace una petición al servicio para insertar en la tabla activities_schedules el horario de la actividad.
 
-        
 
+        */
 
     }
 }

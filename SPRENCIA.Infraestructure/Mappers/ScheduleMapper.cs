@@ -6,30 +6,55 @@ namespace SPRENCIA.Infraestructure.Mappers
     public class ScheduleMapper
     {
         
-        public static ScheduleDto MapToActivitiesSchedulesDtoFromEntity(ActivitiesSchedules scheduledAdded)
+        public static ActivitiesSchedules MapToActivitySchedule(ActivitiyScheduleDto activityScheduleDto)
         {
-            // El objeto que se crea en el servicio se convierte en tipo entidad.
 
-            
+            ActivitiesSchedules activitySchedule = new ActivitiesSchedules();
+            activitySchedule.ActivityId = activityScheduleDto.ActivityId;
+            activitySchedule.ScheduleId = activitySchedule.ScheduleId;
 
-            return scheduleDto;
+            return activitySchedule;
 
         }
 
-        /*public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
+        public static ActivitiyScheduleDto MapToActivitiyScheduleDto(ActivitiesSchedules scheduleAdded)
         {
-
-            ActivityDto ActivityDto = new ActivityDto();
-            ActivityDto.Title = activityAdded.Title;
-            ActivityDto.Description = activityAdded.Description;
-            ActivityDto.Price = activityAdded.Price;
-            // MMM TODO Revisar cómo devuelve al frontend horarios?
-            // ActivityDto.ActivitySchedules = activityAdded.ActivitySchedules; 
-
-            return ActivityDto;
-
-        }*/
+            ActivitiyScheduleDto activityScheduleDto = new ActivitiyScheduleDto();
+            
+            activityScheduleDto.ActivityId = scheduleAdded.ActivityId;
+            
+            List<int> scheduleIdList = new List<int> { scheduleAdded.ScheduleId };
+            activityScheduleDto.ScheduleId = scheduleIdList;
 
 
-    }   
-}
+            return activityScheduleDto;
+
+        }
+
+       
+
+        /*
+        
+        public static ActivitiyScheduleDto MapToActivitiyScheduleDto(ActivitiesSchedules scheduleAdded)
+        {
+            List<ActivitiyScheduleDto> activityScheduleDtoList = new List<ActivitiyScheduleDto>();
+
+            foreach (ActivitiesSchedules schedule in scheduleAdded)
+            {
+                ActivitiyScheduleDto activityScheduleDto = new ActivitiyScheduleDto();
+                activityScheduleDto.ActivityId = schedule.ActivityId;
+
+                List<int> scheduleIdList = new List<int> { schedule.ScheduleId };
+                activityScheduleDto.ScheduleId = scheduleIdList;
+
+                activityScheduleDtoList.Add(activityScheduleDto);
+            }
+
+            return activityScheduleDto;
+
+        } 
+        */
+    }
+
+}   
+

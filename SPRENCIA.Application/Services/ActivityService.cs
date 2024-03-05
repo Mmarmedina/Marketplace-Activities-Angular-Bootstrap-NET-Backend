@@ -55,7 +55,7 @@ namespace SPRENCIA.Application.Services
                 
                 ActivitiyScheduleDto activitySchedule = ScheduleMapper.MapToActivitiesSchedulesDto(newActivity, activityAdded);
 
-                List<ActivitiyScheduleDto> scheduleAdded = await _activityScheduleRepository.Create(activitySchedule);
+                ActivitiyScheduleDto scheduleAdded = await _activityScheduleRepository.Create(activitySchedule);
 
 
                 // REPOSITORIO: 

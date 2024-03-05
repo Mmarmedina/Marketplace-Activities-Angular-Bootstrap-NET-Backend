@@ -33,7 +33,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             Activity activity = Mappers.ActivityMapper.MapToActivity(newActivity);
 
             Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Activity> activityAdded = await _context.Activities.AddAsync(activity);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
 
             // Actividad añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
             ActivityDto activityDto = Mappers.ActivityMapper.MapToActivityDtoFromEntity(activityAdded.Entity);
@@ -77,7 +77,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             if (activityDeleted != null)
             {
                 _context.Activities.Remove(activityDeleted);
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return true;
             }
             
