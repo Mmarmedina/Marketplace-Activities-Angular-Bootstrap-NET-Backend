@@ -11,7 +11,7 @@
 
         public double Price { get; set; }
 
-        public ScheduleDto Schedule { get; set; }
+        public List<ScheduleDto> Schedule { get; set; }
 
         public ReviewDto Review { get; set; }
     }

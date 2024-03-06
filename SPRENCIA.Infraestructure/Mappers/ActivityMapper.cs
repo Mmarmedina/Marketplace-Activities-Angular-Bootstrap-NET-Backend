@@ -21,12 +21,13 @@ namespace SPRENCIA.Infraestructure.Mappers
         public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
         {
                         
-            ActivityDto ActivityDto = new ActivityDto();
-            ActivityDto.Title = activityAdded.Title;
-            ActivityDto.Description = activityAdded.Description;
-            ActivityDto.Price = activityAdded.Price;
+            ActivityDto activityDto = new ActivityDto();
+            activityDto.Id = activityAdded.Id;
+            activityDto.Title = activityAdded.Title;
+            activityDto.Description = activityAdded.Description;
+            activityDto.Price = activityAdded.Price;
 
-            return ActivityDto;
+            return activityDto;
 
         }
 

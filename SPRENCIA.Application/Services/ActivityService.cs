@@ -38,7 +38,7 @@ namespace SPRENCIA.Application.Services
         // MMM 
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
-            ActivityDto? activityAdded = null;
+            ActivityDto activityAdded = null;
             
 
             // Se verifica si la variable newActivity es nula (es decir, si llega el objeto con la información del front).
@@ -57,27 +57,10 @@ namespace SPRENCIA.Application.Services
 
                 ActivitiyScheduleDto scheduleAdded = await _activityScheduleRepository.Create(activitySchedule);
 
-
-                // REPOSITORIO: 
-                // Crear un repositorio, por ejemplo, activityScheduleRepository.
-                // Ese repositorio tendrá un método (activityScheduleRepository) cuya finalidad es hacer una petición a BBDD para insertar el horario de la actividad en la tabla activity_Schedule. 
-                // Hay que crear un objeto que sea la suma del Id de la actividad, que está en activityAdded.ID + el horario que está en newActivity.Id (objeto del tipo activityRequestDto).
-
-
-                // SERVICIO: 
-                // Ese método se va a llamar aquí desde el servicio, tipo: await activityScheduleRepository.Insert(activitySchedule) y el resultado se almacena en una variable.
-                // El repositorio tendrá que tener algo como: await _context.Activities.AddAsync(activitySchedule): objeto que incluye el id actividad y su horario.
-
-                // Repositorio despues de hacer la petición/inserción a bbdd datos devuelve un objeto que hay que mapear para devolver al frontend.
-                // Se devuelve activityAdded
-
-
-
-                // TODO: Después de insertar la actividad tengo que insertar su relación con el horario. 
-                // El horario me tiene que venir en el activityRequestDto.
             }
 
             return activityAdded;
+            
         }
 
         public async Task<bool> DeleteById(int id)

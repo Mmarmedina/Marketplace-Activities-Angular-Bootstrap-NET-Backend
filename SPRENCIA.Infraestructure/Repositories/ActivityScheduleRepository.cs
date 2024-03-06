@@ -17,11 +17,32 @@ namespace SPRENCIA.Infraestructure.Repositories
         public async Task<ActivitiyScheduleDto> Create(ActivitiyScheduleDto activityScheduleDto)
         {
             // Aquí hay que mapear el activityScheduleDto a objeto tipo entidad activities_schedule.
-            ActivitiesSchedules activitySchedule = ScheduleMapper.MapToActivitySchedule(activityScheduleDto);
+            List<ActivitiesSchedules> activitySchedules = ScheduleMapper.MapToActivitySchedules(activityScheduleDto);
+
+            // Se añade la lista creada a BBDD
+            await _context.ActivitiesSchedules.AddRangeAsync(activitySchedules);
+            _context.SaveChanges();
+
+            return new ActivitiyScheduleDto();
+        }
+
+
+        /*
+        
+        public async Task<ActivitiyScheduleDto> Create(ActivitiyScheduleDto activityScheduleDto)
+        {
+            // Aquí hay que mapear el activityScheduleDto a objeto tipo entidad activities_schedule.
+            List<ActivitiesSchedules> activitySchedules = ScheduleMapper.MapToActivitySchedules(activityScheduleDto);
+
+
+
+
+
+            // <ActivitiesSchedules> activitySchedule = ScheduleMapper.MapToActivitySchedule(activityScheduleDto);
 
             // Se añade el objeto creado a BBDD
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivitiesSchedules> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(activitySchedule);
-            _context.SaveChangesAsync();
+            // Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ActivitiesSchedules> scheduleAdded = await _context.ActivitiesSchedules.AddAsync(activitySchedules);
+            _context.SaveChanges();
 
             // Actividad/Horario añadida en base de datos se mapea a un DTO de salida para sacarlo en la API y enviarlo al frontend.
             ActivitiyScheduleDto activityScheduleMapped = ScheduleMapper.MapToActivitiyScheduleDto(scheduleAdded.Entity);
@@ -29,6 +50,8 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityScheduleMapped;
         }
 
+
+         */
 
 
 

@@ -11,6 +11,5 @@ namespace SPRENCIA.Application.Mappers
             activityScheduleDto.ScheduleId = newActivity.Schedule;
             return activityScheduleDto;
         }
-        
     }
 }

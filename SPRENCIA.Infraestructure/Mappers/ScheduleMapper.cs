@@ -5,17 +5,46 @@ namespace SPRENCIA.Infraestructure.Mappers
 {
     public class ScheduleMapper
     {
+        // Aquí hay que mapear el activityScheduleDto a una lista de objetos tipo entidad ActivitiesSchedules.
+
+        public static List<ActivitiesSchedules> MapToActivitySchedules(ActivitiyScheduleDto activityScheduleDto)
+        {
+
+            List<ActivitiesSchedules> activitySchedules = new List<ActivitiesSchedules>();
+
+            foreach (int scheduleId in activityScheduleDto.ScheduleId)
+            {
+                ActivitiesSchedules activitiesSchedule = new ActivitiesSchedules();
+                activitiesSchedule.ActivityId = activityScheduleDto.ActivityId;
+                activitiesSchedule.ScheduleId = scheduleId;
+
+                activitySchedules.Add(activitiesSchedule);
+            }
+
+            return activitySchedules;
+
+        }
+
+        /*
         
         public static ActivitiesSchedules MapToActivitySchedule(ActivitiyScheduleDto activityScheduleDto)
         {
 
             ActivitiesSchedules activitySchedule = new ActivitiesSchedules();
             activitySchedule.ActivityId = activityScheduleDto.ActivityId;
+
+
+
+
+
             activitySchedule.ScheduleId = activitySchedule.ScheduleId;
 
             return activitySchedule;
 
         }
+        
+        
+        /* 
 
         public static ActivitiyScheduleDto MapToActivitiyScheduleDto(ActivitiesSchedules scheduleAdded)
         {
@@ -26,9 +55,7 @@ namespace SPRENCIA.Infraestructure.Mappers
             List<int> scheduleIdList = new List<int> { scheduleAdded.ScheduleId };
             activityScheduleDto.ScheduleId = scheduleIdList;
 
-
             return activityScheduleDto;
-
         }
 
        
