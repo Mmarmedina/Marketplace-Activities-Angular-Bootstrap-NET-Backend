@@ -23,7 +23,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             await _context.ActivitiesSchedules.AddRangeAsync(activitySchedules);
             _context.SaveChanges();
 
-            return new ActivitiyScheduleDto();
+            return new ActivitiyScheduleDto { };
         }
 
 

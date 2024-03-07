@@ -7,6 +7,7 @@ namespace SPRENCIA.Infraestructure.Mappers
     {
         public static Activity MapToActivity(ActivityAddRequestDto newActivity)
         {
+            // Está asignando el objeto newActivity (que es del tipo ActivityAddRequestDto) a una nueva variable llamada actividadRequestDto, del mismo tipo. 
             ActivityAddRequestDto activityRequestDto = newActivity;
 
             // Se crea objeto actividad (almacenado en la variable activity) y se le asignan los valores insertados por el usuario en el frontend (ActivityAddRequestDto)
@@ -20,13 +21,12 @@ namespace SPRENCIA.Infraestructure.Mappers
 
         public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
         {
-                        
             ActivityDto activityDto = new ActivityDto();
             activityDto.Id = activityAdded.Id;
             activityDto.Title = activityAdded.Title;
             activityDto.Description = activityAdded.Description;
             activityDto.Price = activityAdded.Price;
-
+           
             return activityDto;
 
         }
