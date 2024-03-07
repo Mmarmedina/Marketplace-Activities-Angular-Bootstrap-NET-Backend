@@ -36,9 +36,9 @@ namespace SPRENCIA.CrossCutting.Configuration
         {
             services.AddTransient<IActivityRepository, ActivityRepository>();
             services.AddTransient<IActivityScheduleRepository, ActivityScheduleRepository>();
-            services.AddTransient<IReviewRepository, ReviewRepository>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();
-            
+            services.AddTransient<IReviewRepository, ReviewRepository>();
+
             return services;
         }
     }

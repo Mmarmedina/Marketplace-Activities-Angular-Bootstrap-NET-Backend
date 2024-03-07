@@ -5,7 +5,6 @@ namespace SPRENCIA.Application.Mappers
 {
     public class ScheduleMapper
     {
-     
         // Convertir objeto tipo entidad (Schedule) a tipo DTO (ScheduleDto).
         public static ScheduleDto MapToScheduleDto(Schedule schedule) 
         {
@@ -30,17 +29,5 @@ namespace SPRENCIA.Application.Mappers
             return schedulesDto;
 
         }
-
-        /* Borrar: este método está en ActivitiesSchedulesMappers
-
-        // Se toman dos objetos como entrada(ActivityAddRequestDto newActivity y ActivityDto activityAdded) y se mapean propiedades (activityId + ScheduleId) a un nuevo objeto ActivitiyScheduleDto, que luego es devuelto por la función.
-        public static ActivitiyScheduleDto MapToActivitiesSchedulesDto(ActivityAddRequestDto newActivity, ActivityDto activityAdded)
-        {
-            ActivitiyScheduleDto activityScheduleDto = new ActivitiyScheduleDto();
-            activityScheduleDto.ActivityId = activityAdded.Id;
-            activityScheduleDto.ScheduleId = newActivity.Schedule;
-            return activityScheduleDto;
-        }
-        */
     } 
 }

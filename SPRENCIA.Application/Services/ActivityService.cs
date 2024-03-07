@@ -13,6 +13,7 @@ namespace SPRENCIA.Application.Services
         private readonly IActivityRepository _activityRepository;
         private readonly IActivityScheduleRepository _activityScheduleRepository;
         private readonly IScheduleRepository _scheduleRepository;
+       
 
         public ActivityService(IActivityRepository activityRepository, IActivityScheduleRepository activityScheduleRepository, IScheduleRepository scheduleRepository)
         {
@@ -36,22 +37,19 @@ namespace SPRENCIA.Application.Services
 
             ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
 
-            /*
-            // Recuperar de la tabla Schedules los horarios de la actividad
-            List<Schedule> schedulesActivity = await _scheduleRepository.GetByActivity(activityDto.Id);
+            // Se recuperan los horarios de una actividad mediante la relación las entidades activities_schedules + schedules.
+            List<Schedule> schedules = await _scheduleRepository.GetAllOnlyAnActivity(activityDto.Id);
 
-            // Mapear lista de objetos recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
-            List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedulesActivity);
+            // Mapear lista de objetos (horarios) recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
+            List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedules);
 
-            // TODO: Asignar el horario a activityDto
-            activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityDto, schedulesDto);
+            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            ActivityDto activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityDto, schedulesDto);
 
-            */
-
-            return activityDto;
+            return activityResponseDto;
         }
 
-        /*
+        /* MMM Recuperar datos actividad por ID, pero no devuelve opiniones ni horarios. Borrar es solo para pruebas.
         public async Task<ActivityDto> GetById(int id)
         {
             Activity activity = await _activityRepository.GetById(id);
@@ -60,8 +58,6 @@ namespace SPRENCIA.Application.Services
         }
         */
         
-       
-
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             ActivityDto? activityAdded = null;
@@ -85,15 +81,14 @@ namespace SPRENCIA.Application.Services
                 ActivitiyScheduleDto scheduleAdded = await _activityScheduleRepository.Create(activitySchedule);
 
                 // Recuperar de la tabla Schedules los horarios de la actividad creada.
-                List<Schedule> schedulesActivity = await _scheduleRepository.GetById(activitySchedule.ScheduleId);
+                List<Schedule> schedulesActivity = await _scheduleRepository.GetByIdList(activitySchedule.ScheduleId);
 
                 // Mapear lista de objetos recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
                 List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedulesActivity);
 
-                // TODO: Asignar el horario a activityDto
+                // Asignar el horario a activityDto
                 activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityAdded, schedulesDto);
 
-                
             }
             return activityResponseDto;
         }
@@ -109,7 +104,5 @@ namespace SPRENCIA.Application.Services
 
             return false;
         }
-
-        
     }
 }
