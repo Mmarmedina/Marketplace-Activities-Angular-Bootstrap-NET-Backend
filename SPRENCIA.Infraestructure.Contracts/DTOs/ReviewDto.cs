@@ -6,6 +6,7 @@
         //MMM Dto salida de opiniones de actividades (datos para enviar al frontend). Se incluye como propiedad dentro de ActivityDto.
         public int Id { get; set; }
         public string ReviewText { get; set; }
-        public int? ActivityId { get; set; }
+        // Borrar
+        // public int? ActivityId { get; set; }
     }
 }

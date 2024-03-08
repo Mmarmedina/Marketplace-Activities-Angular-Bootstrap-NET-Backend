@@ -25,18 +25,18 @@ namespace SPRENCIA_API.Controllers
         [HttpGet]
         [Route("Activities")]
 
-        public async Task<List<ReviewDto>> GetAllAboutActivities()
+        public async Task<List<ReviewWithActivityIdDto>> GetAllAboutActivities()
         {
-            List<ReviewDto> reviewsActivities = await _reviewService.GetAllAboutActivities();
+            List<ReviewWithActivityIdDto> reviewsActivities = await _reviewService.GetAllAboutActivities();
             return reviewsActivities;
         }
 
         [HttpGet]
         [Route("Sprencia")]
 
-        public async Task<List<ReviewSprenciaDto>> GetAllAboutSprencia()
+        public async Task<List<ReviewDto>> GetAllAboutSprencia()
         {
-            List<ReviewSprenciaDto> reviewsSprenciaDto = await _reviewService.GetAllAboutSprencia();
+            List<ReviewDto> reviewsSprenciaDto = await _reviewService.GetAllAboutSprencia();
             return reviewsSprenciaDto;
         }
 

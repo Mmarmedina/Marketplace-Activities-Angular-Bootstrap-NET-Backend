@@ -26,6 +26,7 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<ActivityDto>> GetAll()
         {
+            
             // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
             List<Activity> activities = await _activityRepository.GetAll();
 

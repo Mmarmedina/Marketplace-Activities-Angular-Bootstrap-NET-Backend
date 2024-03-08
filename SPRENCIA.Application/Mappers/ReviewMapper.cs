@@ -11,7 +11,8 @@ namespace SPRENCIA.Application.Mappers
             ReviewDto reviewDto = new ReviewDto();
             reviewDto.Id = review.Id;
             reviewDto.ReviewText = review.ReviewText;
-            reviewDto.ActivityId = review.ActivityId;
+            // Borrar
+            // reviewDto.ActivityId = review.ActivityId;
          
             return reviewDto;
         }
@@ -31,30 +32,33 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
-        // Mapear objeto tipo entidad con información opinión de Sprencia
-        public static ReviewSprenciaDto MapToReviewSprenciaDto(Review review)
+       
+        // Dto salida incluye activityId
+        public static ReviewWithActivityIdDto MapToReviewWithActivityIdDto(Review review)
         {
-            ReviewSprenciaDto reviewSprenciaDto = new ReviewSprenciaDto();
-            reviewSprenciaDto.Id = review.Id;
-            reviewSprenciaDto.ReviewText = review.ReviewText;
+            ReviewWithActivityIdDto ReviewWithActivityIdDto = new ReviewWithActivityIdDto();
+            ReviewWithActivityIdDto.Id = review.Id;
+            ReviewWithActivityIdDto.ReviewText = review.ReviewText;
+            ReviewWithActivityIdDto.ActivityId = review.ActivityId;
 
-            return reviewSprenciaDto;
+            return ReviewWithActivityIdDto;
         }
 
-        // Lista de opiniones sobre Sprencia: Mapear lista de objetos tipo entidad con información opinión de Sprencia
-        public static List<ReviewSprenciaDto> MapToReviewsSprenciaDto(List<Review> reviews)
+        // 
+        public static List<ReviewWithActivityIdDto> ReviewsWithActivityIdDto(List<Review> reviews)
         {
-            List<ReviewSprenciaDto> reviewsSprenciaDto = new List<ReviewSprenciaDto>();
+            List<ReviewWithActivityIdDto> reviewsWithActivityIdDto = new List<ReviewWithActivityIdDto>();
 
             foreach (Review review in reviews)
             {
-                ReviewSprenciaDto reviewSprenciaDto = ReviewMapper.MapToReviewSprenciaDto(review);
-                reviewsSprenciaDto.Add(reviewSprenciaDto);
+                ReviewWithActivityIdDto reviewWithActivityIdDto = ReviewMapper.MapToReviewWithActivityIdDto(review);
+                reviewsWithActivityIdDto.Add(reviewWithActivityIdDto);
             }
 
-            return reviewsSprenciaDto;
+            return reviewsWithActivityIdDto;
 
         }
+
     }
 
 }

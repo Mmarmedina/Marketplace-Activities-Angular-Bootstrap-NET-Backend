@@ -24,17 +24,17 @@ namespace SPRENCIA.Application.Services
         }
 
         // Recuperar solo los registros de la tabla opiniones que estén asociados a una actividad (es decir, solo las opiniones de actividades).
-        public async Task<List<ReviewDto>> GetAllAboutActivities()
+        public async Task<List<ReviewWithActivityIdDto>> GetAllAboutActivities()
         {
             List<Review> reviewsActivities = await _reviewRepository.GetAllAboutActivities();
-            List<ReviewDto> reviewsActivitiesDto = ReviewMapper.MapToReviewsDto(reviewsActivities);
+            List<ReviewWithActivityIdDto> reviewsActivitiesDto = ReviewMapper.ReviewsWithActivityIdDto(reviewsActivities);
             return reviewsActivitiesDto;
         }
 
-        public async Task<List<ReviewSprenciaDto>> GetAllAboutSprencia()
+        public async Task<List<ReviewDto>> GetAllAboutSprencia()
         {
             List<Review> reviewsSprencia = await _reviewRepository.GetAllAboutSprencia();
-            List<ReviewSprenciaDto> reviewsSprenciaDto = ReviewMapper.MapToReviewsSprenciaDto(reviewsSprencia);
+            List<ReviewDto> reviewsSprenciaDto = ReviewMapper.MapToReviewsDto(reviewsSprencia);
             return reviewsSprenciaDto;
         }
 

@@ -48,7 +48,7 @@ namespace SPRENCIA.Application.Mappers
         }
 
         
-        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ScheduleDto> schedulesDto)
+        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ScheduleDto> schedulesDto, List<ReviewDto> reviewDto)
         {
             List<ActivityDto> activitiesResponseDto = new List<ActivityDto>();
 
@@ -65,7 +65,7 @@ namespace SPRENCIA.Application.Mappers
                 activityResponseDto.Schedule = schedulesDto;
 
                 // Asignar las opiniones a ActivityDto
-                
+                activityResponseDto.Review = reviewDto;
 
                 // Agregar la actividad a la lista de actividades con los horarios (almacenada en activitiesResponseDto)
                 activitiesResponseDto.Add(activityResponseDto);
