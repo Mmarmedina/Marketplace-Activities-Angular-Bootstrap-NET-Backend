@@ -5,7 +5,9 @@ namespace SPRENCIA.Infraestructure.Contracts
     public interface IScheduleRepository
     {
         Task<List<Schedule>> GetAll();
-        Task<List<Schedule>> GetAllOnlyAnActivity(int activityId);
+        Task<Schedule> GetById(int id);
         Task<List<Schedule>> GetByIdList(List<int> schedule);
+        Task<List<Schedule>> GetAllAllActivities();
+        Task<List<Schedule>> GetAllOnlyAnActivity(int activityId);
     }
 }

@@ -39,17 +39,17 @@ namespace SPRENCIA.Infraestructure.Repositories
         }
 
         // Recuperar todos los registros activities_schedules + schedules (inner join entre ambas entidades).
-        public async Task<List<ActivitiesSchedulesSchedule>> GetAllAllActivities()
+        public async Task<List<Schedule>> GetAllAllActivities()
         {
-            List<ActivitiesSchedulesSchedule> activitiesSchedulesAndSchedules = await _context.ActivitiesSchedules
-               .Join(_context.Schedules,
+            List<Schedule> schedules = await _context.ActivitiesSchedules
+               .Join(
+                _context.Schedules,
                    sa => sa.Id,
                    s => s.Id,
-                   (sa, s) => new ActivitiesSchedulesSchedule { ActivitySchedules = sa, Schedules = s }
-               )
+                   (sa, s) => s)
                .ToListAsync();
 
-            return activitiesSchedulesAndSchedules;
+            return schedules;
         }
 
         // Recuperar todos los horarios asociados a una actividad (inner join tabla activities_schedules + schedules).
@@ -65,6 +65,22 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return schedules;
         }
+
+        /*
+         * 
+         * public async Task<List<ActivitiesSchedulesSchedule>> GetAllAllActivities()
+        {
+            List<ActivitiesSchedulesSchedule> activitiesSchedulesAndSchedules = await _context.ActivitiesSchedules
+               .Join(_context.Schedules,
+                   sa => sa.Id,
+                   s => s.Id,
+                   (sa, s) => new ActivitiesSchedulesSchedule { ActivitySchedules = sa, Schedules = s }
+               )
+               .ToListAsync();
+
+            return activitiesSchedulesAndSchedules;
+        }
+        */
     }
 }
 

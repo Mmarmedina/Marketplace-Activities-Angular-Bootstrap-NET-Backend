@@ -21,7 +21,6 @@ namespace SPRENCIA_API.Controllers
             return activities;
         }
 
-        // MMM ¿Aquí debería devolver no la actividad, sino un DTO que incluya la información de la actividad y también de la opinión asociada a la actividad para poder pintarla en la página detalle de la actividad?
         [HttpGet("{id}")]
         public async Task<ActivityDto> GetById(int id) 
         {
@@ -52,7 +51,6 @@ namespace SPRENCIA_API.Controllers
             }
         }
       
-        // MMM Me da error: hice restricción que no se borre actividad porque se quedan las opiniones sin las actividades asociadas. Además hay otros errores para ver en Swagger.
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)
         {

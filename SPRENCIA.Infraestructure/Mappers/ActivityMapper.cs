@@ -30,6 +30,5 @@ namespace SPRENCIA.Infraestructure.Mappers
             return activityDto;
 
         }
-
     }    
 }

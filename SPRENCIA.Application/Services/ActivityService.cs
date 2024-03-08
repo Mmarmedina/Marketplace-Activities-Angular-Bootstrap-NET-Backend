@@ -24,15 +24,26 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<ActivityDto>> GetAll()
         {
+            // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
             List<Activity> activities = await _activityRepository.GetAll();
-            List <ActivityDto> activitiesDto = ActivityMapper.MapToActivitiesDto(activities);
-            return activitiesDto;
+
+            // Mapear la lista de objetos tipo actividad a lista de objetos tipo ActivityDTO.
+            List<ActivityDto> activitiesDto = ActivityMapper.MapToActivitiesDto(activities);
+
+            // Solicitud de consulta al repositorio de todos horarios de todas las actividades (inner join: tablas activities_schedules + schedules). El método devuelve solo los horarios de las actividades.
+            List<Schedule> shedules = await _scheduleRepository.GetAllAllActivities();
+
+            // Mapear los registros de la tabla schedules para que estén tipados como SchedulesDto.
+            List<ScheduleDto> scheduleDtos = ScheduleMapper.MaptoSchedulesDto(shedules);
+
+            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, scheduleDtos);
+
+            return activitiesResponseDto;
         }
 
         public async Task<ActivityDto> GetById(int id)
         {
-            // ActivityDto? activityResponseDto = null;
-
             Activity activity = await _activityRepository.GetById(id);
 
             ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
@@ -48,15 +59,6 @@ namespace SPRENCIA.Application.Services
 
             return activityResponseDto;
         }
-
-        /* MMM Recuperar datos actividad por ID, pero no devuelve opiniones ni horarios. Borrar es solo para pruebas.
-        public async Task<ActivityDto> GetById(int id)
-        {
-            Activity activity = await _activityRepository.GetById(id);
-            ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
-            return activityDto;
-        }
-        */
         
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {

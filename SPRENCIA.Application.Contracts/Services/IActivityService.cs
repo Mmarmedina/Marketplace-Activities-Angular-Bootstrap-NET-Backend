@@ -1,5 +1,4 @@
-﻿using SPRENCIA.Domain.Models;
-using SPRENCIA.Infraestructure.Contracts.DTOs;
+﻿using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Application.Contracts.Services
 {
