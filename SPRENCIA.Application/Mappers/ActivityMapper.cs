@@ -34,7 +34,7 @@ namespace SPRENCIA.Application.Mappers
         }
 
         // Crear un objeto ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
-        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules)
+        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules, List<ReviewDto> reviews)
         {
             ActivityDto responseActivityDto = new ActivityDto();
             responseActivityDto.Id = activityDto.Id;
@@ -42,7 +42,7 @@ namespace SPRENCIA.Application.Mappers
             responseActivityDto.Description = activityDto.Description;
             responseActivityDto.Price = activityDto.Price;
             responseActivityDto.Schedule = schedules;
-            // Hacerlo igual que las opiniones. 
+            responseActivityDto.Review = reviews;
 
             return responseActivityDto;
         }
@@ -63,6 +63,9 @@ namespace SPRENCIA.Application.Mappers
 
                 // Asignar los horarios a ActivityDto
                 activityResponseDto.Schedule = schedulesDto;
+
+                // Asignar las opiniones a ActivityDto
+                
 
                 // Agregar la actividad a la lista de actividades con los horarios (almacenada en activitiesResponseDto)
                 activitiesResponseDto.Add(activityResponseDto);

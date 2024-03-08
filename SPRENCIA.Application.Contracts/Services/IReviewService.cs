@@ -1,15 +1,12 @@
-﻿using SPRENCIA.Domain.Models;
-using SPRENCIA.Infraestructure.Contracts.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Application.Contracts.Services
 {
     public interface IReviewService
     {
-        // MMM Task<List<ReviewDto>> GetAll();
+        Task <List<ReviewDto>> GetAll();
+        Task<List<ReviewDto>> GetAllAboutActivities();
+        Task<List<ReviewSprenciaDto>> GetAllAboutSprencia();
+        Task<ReviewDto> GetById(int id);
     }
 }

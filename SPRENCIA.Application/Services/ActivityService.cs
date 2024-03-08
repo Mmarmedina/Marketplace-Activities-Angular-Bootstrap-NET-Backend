@@ -13,13 +13,15 @@ namespace SPRENCIA.Application.Services
         private readonly IActivityRepository _activityRepository;
         private readonly IActivityScheduleRepository _activityScheduleRepository;
         private readonly IScheduleRepository _scheduleRepository;
+        private readonly IReviewRepository _reviewRepository;
        
 
-        public ActivityService(IActivityRepository activityRepository, IActivityScheduleRepository activityScheduleRepository, IScheduleRepository scheduleRepository)
+        public ActivityService(IActivityRepository activityRepository, IActivityScheduleRepository activityScheduleRepository, IScheduleRepository scheduleRepository, IReviewRepository reviewRepository)
         {
             _activityRepository = activityRepository;
             _activityScheduleRepository = activityScheduleRepository;
             _scheduleRepository = scheduleRepository;
+            _reviewRepository = reviewRepository;
         }
 
         public async Task<List<ActivityDto>> GetAll()
@@ -54,16 +56,42 @@ namespace SPRENCIA.Application.Services
             // Mapear lista de objetos (horarios) recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
             List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedules);
 
+            // Recuperar una 
+            List<Review> reviewsOneActivity = await _reviewRepository.GetAllOneActivity(activityDto.Id);
+
+            List<ReviewDto> reviewsOneActivityDto = ReviewMapper.MapToReviewsDto(reviewsOneActivity);
+
+            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            ActivityDto activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityDto, schedulesDto, reviewsOneActivityDto);
+
+            return activityResponseDto;
+        }
+
+        /*
+         public async Task<ActivityDto> GetById(int id)
+        {
+            Activity activity = await _activityRepository.GetById(id);
+
+            ActivityDto activityDto = ActivityMapper.MapToActivityDto(activity);
+
+            // Se recuperan los horarios de una actividad mediante la relación las entidades activities_schedules + schedules.
+            List<Schedule> schedules = await _scheduleRepository.GetAllOnlyAnActivity(activityDto.Id);
+
+            // Mapear lista de objetos (horarios) recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
+            List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedules);
+
             // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
             ActivityDto activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityDto, schedulesDto);
 
             return activityResponseDto;
         }
-        
+        */
+
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             ActivityDto? activityAdded = null;
             ActivityDto? activityResponseDto = null;
+            List<ReviewDto>? reviewDto = null;
             
             // Se verifica si la variable newActivity es nula (es decir, si llega el objeto con la información del front).
 
@@ -89,7 +117,7 @@ namespace SPRENCIA.Application.Services
                 List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedulesActivity);
 
                 // Asignar el horario a activityDto
-                activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityAdded, schedulesDto);
+                activityResponseDto = ActivityMapper.MapToResponseActivityDto(activityAdded, schedulesDto, reviewDto);
 
             }
             return activityResponseDto;

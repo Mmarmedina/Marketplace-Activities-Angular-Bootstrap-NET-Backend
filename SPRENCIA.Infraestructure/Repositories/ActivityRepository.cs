@@ -40,7 +40,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityDto;
 
         }
-
         public async Task<bool> DeleteById(int id)
         {
             Activity? activityDeleted = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
