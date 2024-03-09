@@ -5,7 +5,7 @@ namespace SPRENCIA.Application.Mappers
 {
     public class ActivityMapper
     {
-        // Convertir LISTA de objetos tipo Actividad a lista de objetos tipo ActivityDto (solo información de la actividad, sin horarios y opiniones).
+        // MMM Convertir LISTA de objetos tipo Actividad a lista de objetos tipo ActivityDto (solo información de la actividad, sin horarios ni opiniones).
         public static List<ActivityDto> MapToActivitiesDto(List<Activity> activities)
         {
             List<ActivityDto> activitiesDto = new List<ActivityDto>();
@@ -21,7 +21,7 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
-        // Convertir OBJETO tipo Actividad a objeto tipo ActivityDto (solo información de la actividad, sin horarios y opiniones).
+        // MMM Convertir UN OBJETO tipo Actividad a objeto tipo ActivityDto (solo información de la actividad, sin horarios ni opiniones).
         public static ActivityDto MapToActivityDto(Activity activity)
         {
             ActivityDto activityDto = new ActivityDto();
@@ -33,7 +33,7 @@ namespace SPRENCIA.Application.Mappers
             return activityDto;
         }
 
-        // Crear un objeto ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
+        // MMM Crear un objeto ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
         public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules, List<ReviewDto> reviews)
         {
             ActivityDto responseActivityDto = new ActivityDto();
@@ -47,7 +47,7 @@ namespace SPRENCIA.Application.Mappers
             return responseActivityDto;
         }
 
-        
+        // MMM Crear UNA LISTA DE OBJETOS del tipo ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
         public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ScheduleDto> schedulesDto, List<ReviewDto> reviewDto)
         {
             List<ActivityDto> activitiesResponseDto = new List<ActivityDto>();

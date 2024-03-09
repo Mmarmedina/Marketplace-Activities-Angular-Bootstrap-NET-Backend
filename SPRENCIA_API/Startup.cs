@@ -53,7 +53,6 @@ namespace SPRENCIA_API
             app.UseSwaggerUI(cfg =>
             {
                 cfg.SwaggerEndpoint("./v1/swagger.json", "Sprencia API");
-                // cfg.SwaggerEndpoint("./v1/swagger.json", "PacmanApi net core curso.Net");
             });
 
             app.UseHttpsRedirection();

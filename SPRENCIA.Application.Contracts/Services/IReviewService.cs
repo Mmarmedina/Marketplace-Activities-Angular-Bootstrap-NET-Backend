@@ -4,9 +4,9 @@ namespace SPRENCIA.Application.Contracts.Services
 {
     public interface IReviewService
     {
-        Task <List<ReviewDto>> GetAll();
+        Task <List<ReviewWithActivityIdDto>> GetAll();
         Task<List<ReviewWithActivityIdDto>> GetAllAboutActivities();
         Task<List<ReviewDto>> GetAllAboutSprencia();
-        Task<ReviewDto> GetById(int id);
+        Task<ReviewWithActivityIdDto> GetById(int id);
     }
 }

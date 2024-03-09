@@ -28,13 +28,6 @@ namespace SPRENCIA_API.Controllers
             return activity;
         }
 
-        // MMM El frontend en la petición HTTP post envía un objeto con los datos que el usuario ha cumplimentado (nombre, título, descripción, precio y horario/s).
-        // El objeto se alamacena en la varible newActivity. Se tipa como ActivityAddRequestDto.
-        // El objeto almacenado en la variable newActivity se envía al servicio.
-        // Si la variable que almacena la respuesta de la petición al servicio (activityAdded) es null (no se envía ninguna actividad), se indica "La petición no ha podido realizarse".
-        // Si la variable que almacena la respuesta de la petición al servicio de la petición al servicio (activityAdded) no es null, se indica que la respuesta es correcta. 
-        // El método devuelve objeto tipo ActionResult (BadRequest or Ok).
-
         [HttpPost]
         [Route("NewActivity")]
         public async Task<ActionResult> Create([FromBody] ActivityAddRequestDto newActivity)

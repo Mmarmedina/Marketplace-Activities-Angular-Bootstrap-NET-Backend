@@ -5,19 +5,17 @@ namespace SPRENCIA.Application.Mappers
 {
     public class ReviewMapper
     {
-        // Mapear objeto tipo entidad (Review) a objeto tipo DTO salida (ReviewDto).
+        // MMM Mapear UN OBJETO tipo entidad (Review) a objeto tipo DTO salida (ReviewDto).
         public static ReviewDto MapToReviewDto(Review review)
         {
             ReviewDto reviewDto = new ReviewDto();
             reviewDto.Id = review.Id;
             reviewDto.ReviewText = review.ReviewText;
-            // Borrar
-            // reviewDto.ActivityId = review.ActivityId;
-         
+
             return reviewDto;
         }
 
-        // Mapear una lista de objetos tipo entidad a una lista de objetos tipo DTO.
+        // MMM Mapear UNA LISTA de objetos tipo entidad (Review) a una lista de objetos tipo DTO ((ReviewDto).
         public static List<ReviewDto> MapToReviewsDto(List<Review> reviews)
         {
             List<ReviewDto> reviewsDto = new List<ReviewDto>();
@@ -32,8 +30,7 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
-       
-        // Dto salida incluye activityId
+        // MMM Mapear UN OBJETO tipo entidad (Review) a objeto tipo DTO salida (ReviewWithActivityIdDto). Diferencia con el primer método (MapToReviewDto) que en este caso el DTO incluye el ActivityID.
         public static ReviewWithActivityIdDto MapToReviewWithActivityIdDto(Review review)
         {
             ReviewWithActivityIdDto ReviewWithActivityIdDto = new ReviewWithActivityIdDto();
@@ -44,8 +41,8 @@ namespace SPRENCIA.Application.Mappers
             return ReviewWithActivityIdDto;
         }
 
-        // 
-        public static List<ReviewWithActivityIdDto> ReviewsWithActivityIdDto(List<Review> reviews)
+        // MMM Mapear UNA LISTA DE OBJETOS tipo entidad (Review) a objeto tipo DTO salida (ReviewWithActivityIdDto). Igual que el MapToReviewWithActivityIdDto incluye el ActivityId.
+        public static List<ReviewWithActivityIdDto> MapToReviewsWithActivityIdDto(List<Review> reviews)
         {
             List<ReviewWithActivityIdDto> reviewsWithActivityIdDto = new List<ReviewWithActivityIdDto>();
 

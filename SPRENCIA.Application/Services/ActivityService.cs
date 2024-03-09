@@ -24,9 +24,13 @@ namespace SPRENCIA.Application.Services
             _reviewRepository = reviewRepository;
         }
 
+        //  MMM Método que recupera todas las actividades.
+        // La API devuelve los datos de la actividad, con sus horarios y opiniones..
         public async Task<List<ActivityDto>> GetAll()
         {
-            
+
+            List<ReviewDto>? reviewDto = null;
+
             // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
             List<Activity> activities = await _activityRepository.GetAll();
 
@@ -40,11 +44,13 @@ namespace SPRENCIA.Application.Services
             List<ScheduleDto> scheduleDtos = ScheduleMapper.MaptoSchedulesDto(shedules);
 
             // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
-            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, scheduleDtos);
+            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, scheduleDtos, reviewDto);
 
             return activitiesResponseDto;
         }
 
+        // MMM Método que recupera una actividad.
+        // La API devuelve los datos de la actividad, con sus horarios y opiniones.
         public async Task<ActivityDto> GetById(int id)
         {
             Activity activity = await _activityRepository.GetById(id);
@@ -68,7 +74,7 @@ namespace SPRENCIA.Application.Services
             return activityResponseDto;
         }
 
-        /*
+        /* BORRAR
          public async Task<ActivityDto> GetById(int id)
         {
             Activity activity = await _activityRepository.GetById(id);
@@ -88,6 +94,7 @@ namespace SPRENCIA.Application.Services
         }
         */
 
+        // MMM Método para insertar una nueva actividad con sus horarios asociados en BBDD.
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             ActivityDto? activityAdded = null;
@@ -124,6 +131,7 @@ namespace SPRENCIA.Application.Services
             return activityResponseDto;
         }
 
+        // MMM Método para borrar una actividad de la BBDD.
         public async Task<bool> DeleteById(int id)
         {
             bool activityDeleted = await _activityRepository.DeleteById(id);

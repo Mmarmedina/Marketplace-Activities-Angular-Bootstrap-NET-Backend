@@ -15,7 +15,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context = dbcontext;
         }
 
-        // Recupera todos los registros de la tabla activities_schedules.
+        // MMM Recupera todos los registros de la tabla activities_schedules.
         public async Task<List<ActivitiesSchedules>> GetAll()
         {
             List<ActivitiesSchedules> activitiesSchedules = await _context.ActivitiesSchedules.ToListAsync();
@@ -23,7 +23,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activitiesSchedules;
         }
 
-        // Método para insertar nuevos registros en la tabla activities_schedules.
+        // MMM Método para insertar nuevos registros en la tabla activities_schedules.
         public async Task<ActivitiyScheduleDto> Create(ActivitiyScheduleDto activityScheduleDto)
         {
             // Aquí hay que mapear el activityScheduleDto a objeto tipo entidad activities_schedule.

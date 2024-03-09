@@ -5,7 +5,7 @@ namespace SPRENCIA.Infraestructure.Mappers
 {
     public class ScheduleMapper
     {
-        // Aquí hay que mapear el activityScheduleDto a una lista de objetos tipo entidad ActivitiesSchedules.
+        // MMM Mapear lista de DTO (activityScheduleDto) a una LISTA DE OBJETOS tipo entidad ActivitiesSchedules.
 
         public static List<ActivitiesSchedules> MapToActivitySchedules(ActivitiyScheduleDto activityScheduleDto)
         {

@@ -15,22 +15,23 @@ namespace SPRENCIA.Application.Services
             _reviewRepository = reviewRepository;
         }
 
-        // Recuperar todas las opiniones de la entidad Reviews (las de las actividades y las de Sprencia).
-        public async Task<List<ReviewDto>> GetAll()
+        // MMM Recuperar todas las opiniones de la entidad Reviews (tanto de las de actividades como de las de Sprencia).
+        public async Task<List<ReviewWithActivityIdDto>> GetAll()
         {
             List<Review> reviews = await _reviewRepository.GetAll();
-            List<ReviewDto> reviewsDto = ReviewMapper.MapToReviewsDto(reviews);
+            List<ReviewWithActivityIdDto> reviewsDto = ReviewMapper.MapToReviewsWithActivityIdDto(reviews);
             return reviewsDto;
         }
 
-        // Recuperar solo los registros de la tabla opiniones que estén asociados a una actividad (es decir, solo las opiniones de actividades).
+        // MMM Recuperar sólo los registros de la tabla opiniones que estén asociados a una actividad (es decir, solo las opiniones de actividades).
         public async Task<List<ReviewWithActivityIdDto>> GetAllAboutActivities()
         {
             List<Review> reviewsActivities = await _reviewRepository.GetAllAboutActivities();
-            List<ReviewWithActivityIdDto> reviewsActivitiesDto = ReviewMapper.ReviewsWithActivityIdDto(reviewsActivities);
+            List<ReviewWithActivityIdDto> reviewsActivitiesDto = ReviewMapper.MapToReviewsWithActivityIdDto(reviewsActivities);
             return reviewsActivitiesDto;
         }
 
+        // MMM Recuperar sólo las opiniones de Sprencia.
         public async Task<List<ReviewDto>> GetAllAboutSprencia()
         {
             List<Review> reviewsSprencia = await _reviewRepository.GetAllAboutSprencia();
@@ -38,11 +39,11 @@ namespace SPRENCIA.Application.Services
             return reviewsSprenciaDto;
         }
 
-        //  Recuperar una opinión por ID.
-        public async Task<ReviewDto> GetById(int id)
+        //  MMM Recuperar una opinión por ID.
+        public async Task<ReviewWithActivityIdDto> GetById(int id)
         {
             Review review = await _reviewRepository.GetById(id);
-            ReviewDto reviewDto = ReviewMapper.MapToReviewDto(review);
+            ReviewWithActivityIdDto reviewDto = ReviewMapper.MapToReviewWithActivityIdDto(review);
 
             return reviewDto;
         }

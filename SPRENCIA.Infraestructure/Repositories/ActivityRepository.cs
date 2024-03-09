@@ -14,18 +14,21 @@ namespace SPRENCIA.Infraestructure.Repositories
         { 
             _context = dbcontext;
         }
+        // MMM Método que hace petición a BBDD de todas las actividades.
         public async Task<List<Activity>> GetAll()
         {
             List<Activity> activities = await _context.Activities.ToListAsync();
             return activities;
         }
 
+        // MMM Método que hace petición a BBDD de una actividad.
         public async Task<Activity?> GetById(int id)
         {
             Activity? activity = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();
             return activity;
         }
 
+        // MMM Método que pide a la BBDD insertar una actividad.
         public async Task<ActivityDto> Create(ActivityAddRequestDto newActivity)
         {
             // Se crea objeto actividad (almacenado en la variable activity) y se le asignan los valores insertados por el usuario en el frontend (ActivityAddRequestDto)
@@ -40,6 +43,8 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityDto;
 
         }
+
+        // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)
         {
             Activity? activityDeleted = await _context.Activities.Where(x => x.Id == id).FirstOrDefaultAsync();

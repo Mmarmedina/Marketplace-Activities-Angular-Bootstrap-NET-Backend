@@ -4,7 +4,10 @@ using SPRENCIA.Infraestructure.Contracts.DTOs;
 namespace SPRENCIA.Infraestructure.Mappers
 {
     public class ActivityMapper
+
     {
+        // MMM Mapear los datos de un objeto ActivityAddRequestDto a un objeto Activity, para poder insertar una nueva actividad en BBDD.
+
         public static Activity MapToActivity(ActivityAddRequestDto newActivity)
         {
             // Está asignando el objeto newActivity (que es del tipo ActivityAddRequestDto) a una nueva variable llamada actividadRequestDto, del mismo tipo. 
@@ -19,6 +22,7 @@ namespace SPRENCIA.Infraestructure.Mappers
             return activity;
         }
 
+        // MMM Mapear los datos de una entidad Activity a un objeto DTO (ActivityDto).
         public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
         {
             ActivityDto activityDto = new ActivityDto();

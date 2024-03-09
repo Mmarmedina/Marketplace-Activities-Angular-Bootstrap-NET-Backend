@@ -16,9 +16,9 @@ namespace SPRENCIA_API.Controllers
        }
 
        [HttpGet]
-       public async Task<List<ReviewDto>> GetAll()
+       public async Task<List<ReviewWithActivityIdDto>> GetAll()
        {
-            List<ReviewDto> reviewsDto = await _reviewService.GetAll();
+            List<ReviewWithActivityIdDto> reviewsDto = await _reviewService.GetAll();
             return reviewsDto;
        }
 
@@ -41,9 +41,9 @@ namespace SPRENCIA_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ReviewDto> GetById(int id)
+        public async Task<ReviewWithActivityIdDto> GetById(int id)
         {
-            ReviewDto reviewDto = await _reviewService.GetById(id);
+            ReviewWithActivityIdDto reviewDto = await _reviewService.GetById(id);
             return reviewDto;
         }
     }

@@ -13,7 +13,5 @@ namespace SPRENCIA.Infraestructure.Contracts
 
         Task<bool> DeleteById(int id);
 
-        // TODO: falta por hacer el método Update
-
     }
 }
