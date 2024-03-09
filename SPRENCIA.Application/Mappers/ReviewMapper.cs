@@ -15,7 +15,7 @@ namespace SPRENCIA.Application.Mappers
             return reviewDto;
         }
 
-        // MMM Mapear UNA LISTA de objetos tipo entidad (Review) a una lista de objetos tipo DTO ((ReviewDto).
+        // MMM Mapear UNA LISTA de objetos tipo entidad (Review) a una lista de objetos tipo DTO (ReviewDto).
         public static List<ReviewDto> MapToReviewsDto(List<Review> reviews)
         {
             List<ReviewDto> reviewsDto = new List<ReviewDto>();

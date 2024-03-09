@@ -40,6 +40,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             List<Review> reviewsOneActivity = await _context.Reviews.Where(r => r.ActivityId ==  activityId).ToListAsync();
             return reviewsOneActivity;
         }
+        
 
         // MMM Método para recuperar una opinión por ID.
         public async Task<Review?> GetById(int id)
@@ -47,8 +48,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             Review? review = await _context.Reviews.Where(r => r.Id == id).FirstOrDefaultAsync();
             return review;
         }
-
-       
 
     }
 }

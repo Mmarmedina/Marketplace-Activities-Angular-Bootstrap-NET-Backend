@@ -21,12 +21,14 @@ namespace SPRENCIA_API.Controllers
             return activities;
         }
 
+        
         [HttpGet("{id}")]
         public async Task<ActivityDto> GetById(int id) 
         {
             ActivityDto activity = await _activityService.GetById(id);
             return activity;
         }
+        
 
         [HttpPost]
         [Route("NewActivity")]

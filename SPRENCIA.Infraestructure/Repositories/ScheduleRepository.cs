@@ -56,9 +56,10 @@ namespace SPRENCIA.Infraestructure.Repositories
         public async Task<List<Schedule>> GetAllOnlyAnActivity(int activityId)
         {
             List<Schedule> schedules = await _context.ActivitiesSchedules
+                .Where(sa => sa.ActivityId == activityId)
                 .Join(
                    _context.Schedules,
-                   sa => sa.Id,
+                   sa => sa.ScheduleId,
                    s => s.Id,
                    (sa, s) => s)
                 .ToListAsync();

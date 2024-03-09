@@ -61,11 +61,14 @@ namespace SPRENCIA.Application.Mappers
                 activityResponseDto.Description = activityDto.Description;
                 activityResponseDto.Price = activityDto.Price;
 
-                // Asignar los horarios a ActivityDto
+                // Asignar todos los horarios a ActivityDto.
                 activityResponseDto.Schedule = schedulesDto;
 
+                // Asociar las opiniones a la actividad.
+                // List<ReviewDto>? reviewsDto = reviewDto.Where(r => r.ActivityId == activityDto.Id).ToList();
+
                 // Asignar las opiniones a ActivityDto
-                activityResponseDto.Review = reviewDto;
+                // activityResponseDto.Review = reviewDto;
 
                 // Agregar la actividad a la lista de actividades con los horarios (almacenada en activitiesResponseDto)
                 activitiesResponseDto.Add(activityResponseDto);
@@ -74,5 +77,7 @@ namespace SPRENCIA.Application.Mappers
             return activitiesResponseDto;
 
         }
+
+        
     }
 }

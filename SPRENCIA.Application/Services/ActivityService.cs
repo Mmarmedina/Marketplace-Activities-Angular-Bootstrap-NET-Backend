@@ -24,11 +24,71 @@ namespace SPRENCIA.Application.Services
             _reviewRepository = reviewRepository;
         }
 
+        /* Método usando el GetAll: actividades, horarios y opiniones. 
         //  MMM Método que recupera todas las actividades.
         // La API devuelve los datos de la actividad, con sus horarios y opiniones..
         public async Task<List<ActivityDto>> GetAll()
         {
+            // List<ReviewDto> reviewsDto = null;
 
+            // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
+            List<Activity> activities = await _activityRepository.GetAll();
+
+            // Mapear la lista de objetos tipo actividad a lista de objetos tipo ActivityDTO.
+            List<ActivityDto> activitiesDto = ActivityMapper.MapToActivitiesDto(activities);
+
+            // Solicitud de consulta al repositorio de todos horarios de todas las actividades (inner join: tablas activities_schedules + schedules). El método devuelve solo los horarios de las actividades.
+            List<Schedule> shedules = await _scheduleRepository.GetAllAllActivities();
+
+            // Mapear los registros de la tabla schedules para que estén tipados como SchedulesDto.
+            List<ScheduleDto> schedulesDtos = ScheduleMapper.MaptoSchedulesDto(shedules);
+
+            List<Review> reviewsPerActivity = await _reviewRepository.GetAllAboutActivities();
+
+            // Mapear la lista de opiones recibida.
+            List<ReviewDto> reviewsDto = ReviewMapper.MapToReviewsDto(reviewsPerActivity);
+
+            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, schedulesDtos, reviewsDto);
+
+            return activitiesResponseDto;
+        }
+        */
+
+
+
+
+
+        //  MMM Método que recupera todas las actividades.
+        // La API devuelve los datos de la actividad, con sus horarios y opiniones..
+
+        /*
+        public async Task<List<ActivityDto>> GetAll()
+        {
+            List<ReviewDto> reviewsDto = null;
+
+            // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
+            List<Activity> activities = await _activityRepository.GetAll();
+
+            // Mapear la lista de objetos tipo actividad a lista de objetos tipo ActivityDTO.
+            List<ActivityDto> activitiesDto = ActivityMapper.MapToActivitiesDto(activities);
+
+            // Solicitud de consulta al repositorio de todos horarios de todas las actividades (inner join: tablas activities_schedules + schedules). El método devuelve solo los horarios de las actividades.
+            List<Schedule> shedules = await _scheduleRepository.GetAllAllActivities();
+
+            // Mapear los registros de la tabla schedules para que estén tipados como SchedulesDto.
+            List<ScheduleDto> schedulesDtos = ScheduleMapper.MaptoSchedulesDto(shedules);
+
+            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, schedulesDtos);
+
+            return activitiesResponseDto;
+        }
+        */
+
+
+        public async Task<List<ActivityDto>> GetAll()
+        {
             List<ReviewDto>? reviewDto = null;
 
             // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
@@ -63,9 +123,10 @@ namespace SPRENCIA.Application.Services
             // Mapear lista de objetos (horarios) recuperada de tipo entidad (Schedule) a lista objetos tipo DTO (ScheduleDto).
             List<ScheduleDto> schedulesDto = ScheduleMapper.MaptoSchedulesDto(schedules);
 
-            // Recuperar una 
+            // Recuperar las opiniones de una actividad
             List<Review> reviewsOneActivity = await _reviewRepository.GetAllOneActivity(activityDto.Id);
 
+            // Convertir la lista de opiniones de una actividad que se ha recuperado y convertirlo en una lista de ReviewDto.
             List<ReviewDto> reviewsOneActivityDto = ReviewMapper.MapToReviewsDto(reviewsOneActivity);
 
             // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
