@@ -7,7 +7,7 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<List<Schedule>> GetAll();
         Task<Schedule> GetById(int id);
         Task<List<Schedule>> GetByIdList(List<int> schedule);
-        Task<List<Schedule>> GetAllAllActivities();
+        Task<List<ActivitiesSchedulesSchedules>> GetAllAllActivities();
         Task<List<Schedule>> GetAllOnlyAnActivity(int activityId);
     }
 }
