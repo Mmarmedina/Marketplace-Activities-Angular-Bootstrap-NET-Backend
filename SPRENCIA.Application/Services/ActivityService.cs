@@ -89,8 +89,8 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<ActivityDto>> GetAll()
         {
-            List<ReviewDto>? reviewDto = null;
-            List<ScheduleDto>? scheduleDtos = null;
+            // List<ReviewDto>? reviewDto = null;
+            // List<ScheduleDto>? scheduleDtos = null;
 
             // Petición al repositorio que devuelva todas las actividades. La variable activities guarda una lista de objetos tipo entidad, de la tabla actividades.
             List<Activity> activities = await _activityRepository.GetAll();
@@ -107,7 +107,7 @@ namespace SPRENCIA.Application.Services
             // List<ScheduleDto> scheduleDtos = ScheduleMapper.MaptoSchedulesDto(shedules);
 
             // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
-            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, activitiesWithSchedules, reviewDto);
+            List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, activitiesWithSchedules);
 
             return activitiesResponseDto;
         }

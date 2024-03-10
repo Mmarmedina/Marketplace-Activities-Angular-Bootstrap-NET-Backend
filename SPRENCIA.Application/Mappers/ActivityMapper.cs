@@ -1,5 +1,7 @@
-﻿using SPRENCIA.Infraestructure.Contracts.DTOs;
-using SPRENCIA.Domain.Models;
+﻿using SPRENCIA.Domain.Models;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
+
+
 
 namespace SPRENCIA.Application.Mappers
 {
@@ -20,7 +22,7 @@ namespace SPRENCIA.Application.Mappers
         }
 
         // MMM Crear UNA LISTA DE OBJETOS del tipo ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ActivitiesSchedulesSchedule, ReviewDto).
-        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ActivitiesSchedulesSchedules> activitiesShedulesDto, List<ReviewDto> reviewDto)
+        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ActivitiesSchedulesSchedules> activitiesShedulesDto)
         {
             // MMM Borrar comentarios. 
                 // Me he traido del repositorio una lista que tiene el ID de actividad + ID horario + la tabla schedule (ID del horario + el Name).
@@ -44,9 +46,12 @@ namespace SPRENCIA.Application.Mappers
                 activityResponseDto.Description = activityDto.Description;
                 activityResponseDto.Price = activityDto.Price;
 
-                // MMM Lógica para asignar los horarios a cada actividad. 
+                // MMM Lógica para asignar los horarios a cada actividad.
 
-                // Se crea un objeto del tipo ScheduleDto (que tendrá el ID del horario y el horario).
+                // Mapear convertir lista de objetos tipo Activities_Schedules + Schedules en SchedulesDto.
+                List<ScheduleDto> schedulesForActivity = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesSchedules(activityDto, activitiesShedulesDto);
+
+                /*  Se crea un objeto del tipo ScheduleDto (que tendrá el ID del horario y el horario).
                 List<ScheduleDto> schedulesForActivity = new List<ScheduleDto>();
 
                 // Se ha recibido por parémetro una lista que es la suma de ActivitiesSchedules + Schedules, almacenada en activitiesShedulesDto. 
@@ -68,18 +73,19 @@ namespace SPRENCIA.Application.Mappers
                         }
                     }
                 }
+                */
 
                 // Se asigna la lista de horarios filtrados (schedulesForActivity) a la propiedad Schedule de la actividad actual 
                 activityResponseDto.Schedule = schedulesForActivity;
+
+                // Asignar las opiniones a ActivityDto
+                // activityResponseDto.Review = reviewDto;
+
 
                 activitiesResponseDto.Add(activityResponseDto);
             }
 
             return activitiesResponseDto;
-
-            // Asignar las opiniones a ActivityDto
-            // activityResponseDto.Review = reviewDto;
-
 
         }
 
