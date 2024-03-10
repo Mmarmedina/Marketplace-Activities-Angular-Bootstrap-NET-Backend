@@ -13,6 +13,6 @@
 
         public List<ScheduleDto> Schedule { get; set; }
 
-        public List<ReviewDto> Review { get; set; }
+        public List<ReviewWithActivityIdDto> Review { get; set; }
     }
 }

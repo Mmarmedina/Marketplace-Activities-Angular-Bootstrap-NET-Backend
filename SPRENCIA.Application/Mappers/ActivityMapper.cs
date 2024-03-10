@@ -8,7 +8,7 @@ namespace SPRENCIA.Application.Mappers
     public class ActivityMapper
     {
         // MMM Crear un objeto ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
-        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules, List<ReviewDto> reviews)
+        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules, List<ReviewWithActivityIdDto> reviews)
         {
             ActivityDto responseActivityDto = new ActivityDto();
             responseActivityDto.Id = activityDto.Id;
@@ -22,7 +22,7 @@ namespace SPRENCIA.Application.Mappers
         }
 
         // MMM Crear UNA LISTA DE OBJETOS del tipo ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ActivitiesSchedulesSchedule, ReviewDto).
-        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ActivitiesSchedulesSchedules> activitiesShedulesDto)
+        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ActivitiesSchedulesSchedules> activitiesShedulesDto, List<ReviewWithActivityIdDto> reviewsDto)
         {
             // MMM Borrar comentarios. 
                 // Me he traido del repositorio una lista que tiene el ID de actividad + ID horario + la tabla schedule (ID del horario + el Name).
@@ -51,7 +51,10 @@ namespace SPRENCIA.Application.Mappers
                 // Mapear convertir lista de objetos tipo Activities_Schedules + Schedules en SchedulesDto.
                 List<ScheduleDto> schedulesForActivity = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesSchedules(activityDto, activitiesShedulesDto);
 
-                /*  Se crea un objeto del tipo ScheduleDto (que tendrá el ID del horario y el horario).
+                // Se asigna la lista de horarios filtrados (schedulesForActivity) a la propiedad Schedule de la actividad actual.
+                activityResponseDto.Schedule = schedulesForActivity;
+
+                /*  Borrar: se ha refactorizado. Se crea un objeto del tipo ScheduleDto (que tendrá el ID del horario y el horario).
                 List<ScheduleDto> schedulesForActivity = new List<ScheduleDto>();
 
                 // Se ha recibido por parémetro una lista que es la suma de ActivitiesSchedules + Schedules, almacenada en activitiesShedulesDto. 
@@ -75,11 +78,27 @@ namespace SPRENCIA.Application.Mappers
                 }
                 */
 
-                // Se asigna la lista de horarios filtrados (schedulesForActivity) a la propiedad Schedule de la actividad actual 
-                activityResponseDto.Schedule = schedulesForActivity;
+                // Llega una lista de ReviewDto. 
+
+                List<ReviewWithActivityIdDto> reviewsForActivity = new List<ReviewWithActivityIdDto>();
+
+                foreach (ReviewWithActivityIdDto reviewDto in reviewsDto)
+                {
+                    if (reviewDto.ActivityId == activityDto.Id)
+                    {
+                        ReviewWithActivityIdDto reviewDtoItem = new ReviewWithActivityIdDto
+                        {
+                            Id = reviewDto.Id,
+                            ReviewText = reviewDto.ReviewText,
+                            ActivityId = reviewDto.ActivityId
+                        };
+
+                        reviewsForActivity.Add(reviewDtoItem);
+                    }
+                }
 
                 // Asignar las opiniones a ActivityDto
-                // activityResponseDto.Review = reviewDto;
+                activityResponseDto.Review = reviewsForActivity;
 
 
                 activitiesResponseDto.Add(activityResponseDto);
@@ -116,111 +135,5 @@ namespace SPRENCIA.Application.Mappers
 
             return activityDto;
         }
-
-
-
-        /* OTRA VERSION: ESTA FUNCIONA SIN ERRORES PERO SACA TODAS LOS HORARIOS NO EL DE LA ACTIVIDAD EN PARTICULAR.
-        // MMM Crear UNA LISTA DE OBJETOS del tipo ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
-        public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ActivitiesSchedulesSchedules> activitiesShedulesDto, List<ReviewDto> reviewDto)
-        {
-            // Me he traido del repositorio una lista que tiene el ID de actividad + ID horario + la tabla schedule (ID del horario + el Name).
-            // Yo necesito devolver al front únicamente un scheduleDto que incluye el ID y el horario (name) de la actividad.
-            // Cómo creo ese objeto teniendo la lista de ActivitiesSchedulesSchedules.
-            // Entonces cuando lo tenga en cada vuelta del foreach el objeto, equiparo: activityResponseDto.Schedule = al objeto creado;
-            // Necesito que la lista que recibo con ambas tablas, me convierta en otra lista con un objeto del tipo Schedule (solo el ID de la actividad con su horario). 
-            // En cada vuelta del bucle foreach de Activity Dto necesito igualara activityResponseDtoSchedule = ScheduleDto.
-            // Como consigo 
-
-
-            List<ScheduleDto> schedulesDto = new List<ScheduleDto>();
-
-            foreach (ActivitiesSchedulesSchedules activityShedulesDto in activitiesShedulesDto)
-            {
-                foreach (ActivitiesSchedules activitySchedulesDtoItem in activityShedulesDto.ActivitiesSchedules)
-                {
-                    int id = activitySchedulesDtoItem.ScheduleId;
-                    string name = activitySchedulesDtoItem.Schedule.Name;
-                    // int activityId = activitySchedulesDtoItem.ActivityId;
-
-                    ScheduleDto scheduleDto = new ScheduleDto
-                    {
-                        Id = id,
-                        Name = name,
-                        // ActivityId = activityId
-
-                    };
-
-                    schedulesDto.Add(scheduleDto);
-                }
-
-            }
-
-            List<ActivityDto> activitiesResponseDto = new List<ActivityDto>();
-
-            foreach (ActivityDto activityDto in activitiesDto)
-            {
-                ActivityDto activityResponseDto = new ActivityDto();
-
-                activityResponseDto.Id = activityDto.Id;
-                activityResponseDto.Title = activityDto.Title;
-                activityResponseDto.Description = activityDto.Description;
-                activityResponseDto.Price = activityDto.Price;
-                
-                List<ScheduleDto> activitySchdules = schedulesDto.Where(s => s.Id == activityDto.Id).ToList();
-                activityResponseDto.Schedule = schedulesDto;
-
-                activitiesResponseDto.Add(activityResponseDto);
-
-            }
-
-            
-            
-            return activitiesResponseDto;
-
-
-            // Asignar las opiniones a ActivityDto
-            // activityResponseDto.Review = reviewDto;
-
-
-        }
-
-        */
-
-
-
-
-        /* una version
-         * public static List<ActivityDto> MapToResponseActivitiesDto(List<ActivityDto> activitiesDto, List<ScheduleDto> schedulesDto, List<ReviewDto> reviewDto)
-        {
-            List<ActivityDto> activitiesResponseDto = new List<ActivityDto>();
-
-            foreach (ActivityDto activityDto in activitiesDto)
-            {
-                ActivityDto activityResponseDto = new ActivityDto();
-
-                activityResponseDto.Id = activityDto.Id;
-                activityResponseDto.Title = activityDto.Title;
-                activityResponseDto.Description = activityDto.Description;
-                activityResponseDto.Price = activityDto.Price;
-
-                // Asignar todos los horarios a ActivityDto.
-                activityResponseDto.Schedule = schedulesDto;
-
-                // Asociar las opiniones a la actividad.
-                // List<ReviewDto>? reviewsDto = reviewDto.Where(r => r.ActivityId == activityDto.Id).ToList();
-
-                // Asignar las opiniones a ActivityDto
-                // activityResponseDto.Review = reviewDto;
-
-                // Agregar la actividad a la lista de actividades con los horarios (almacenada en activitiesResponseDto)
-                activitiesResponseDto.Add(activityResponseDto);
-            }
-
-            return activitiesResponseDto;
-
-        }
-
-        */
-
     }
 }

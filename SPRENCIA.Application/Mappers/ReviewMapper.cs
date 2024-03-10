@@ -30,18 +30,7 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
-        // MMM Mapear UN OBJETO tipo entidad (Review) a objeto tipo DTO salida (ReviewWithActivityIdDto). Diferencia con el primer método (MapToReviewDto) que en este caso el DTO incluye el ActivityID.
-        public static ReviewWithActivityIdDto MapToReviewWithActivityIdDto(Review review)
-        {
-            ReviewWithActivityIdDto ReviewWithActivityIdDto = new ReviewWithActivityIdDto();
-            ReviewWithActivityIdDto.Id = review.Id;
-            ReviewWithActivityIdDto.ReviewText = review.ReviewText;
-            ReviewWithActivityIdDto.ActivityId = review.ActivityId;
-
-            return ReviewWithActivityIdDto;
-        }
-
-        // MMM Mapear UNA LISTA DE OBJETOS tipo entidad (Review) a objeto tipo DTO salida (ReviewWithActivityIdDto). Igual que el MapToReviewWithActivityIdDto incluye el ActivityId.
+        // MMM Mapear UNA LISTA de objetos tipo entidad (Review) a una lista de objetos tipo DTO (ReviewWithActivityIdDto).
         public static List<ReviewWithActivityIdDto> MapToReviewsWithActivityIdDto(List<Review> reviews)
         {
             List<ReviewWithActivityIdDto> reviewsWithActivityIdDto = new List<ReviewWithActivityIdDto>();
@@ -54,6 +43,16 @@ namespace SPRENCIA.Application.Mappers
 
             return reviewsWithActivityIdDto;
 
+        }
+
+        public static ReviewWithActivityIdDto MapToReviewWithActivityIdDto(Review review)
+        {
+            ReviewWithActivityIdDto reviewWithActivityIdDto = new ReviewWithActivityIdDto();
+            reviewWithActivityIdDto.Id = review.Id;
+            reviewWithActivityIdDto.ReviewText = review.ReviewText;
+            reviewWithActivityIdDto.ActivityId = review.ActivityId;
+
+            return reviewWithActivityIdDto;
         }
 
     }
