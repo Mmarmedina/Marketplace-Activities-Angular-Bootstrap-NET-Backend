@@ -112,8 +112,7 @@ namespace SPRENCIA.Application.Services
 
         public async Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto)
         {
-            Activity? activityUpdated = await _activityRepository.Update(activityUpdatedRequestDto);
-            ActivityDto? activityUpdatedDto = ActivityMapper.MapToActivityDto(activityUpdated);
+            ActivityDto? activityUpdatedDto = await _activityRepository.Update(activityUpdatedRequestDto);
             return activityUpdatedDto;
         }
 
