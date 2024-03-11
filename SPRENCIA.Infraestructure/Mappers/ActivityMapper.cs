@@ -7,7 +7,6 @@ namespace SPRENCIA.Infraestructure.Mappers
 
     {
         // MMM Mapear los datos de un objeto ActivityAddRequestDto a un objeto Activity, para poder insertar una nueva actividad en BBDD.
-
         public static Activity MapToActivity(ActivityAddRequestDto newActivity)
         {
             // Está asignando el objeto newActivity (que es del tipo ActivityAddRequestDto) a una nueva variable llamada actividadRequestDto, del mismo tipo. 
@@ -34,5 +33,16 @@ namespace SPRENCIA.Infraestructure.Mappers
             return activityDto;
 
         }
-    }    
+
+        // La actividad que se quiere actualizar se recupera de la base de datos (searchUpdatedActivity) y se le asignan los valores que ha enviado el frotend.
+        public static Activity MapToActivityFromActivityUpdatedRequestDto(Activity searchUpdatedActivity, ActivityUpdatedRequestDto activityUpdatedRequestDto)
+        {
+            searchUpdatedActivity.Id = activityUpdatedRequestDto.Id;
+            searchUpdatedActivity.Title = activityUpdatedRequestDto.Title;
+            searchUpdatedActivity.Description = activityUpdatedRequestDto.Description;
+            searchUpdatedActivity.Price = activityUpdatedRequestDto.Price;
+
+            return searchUpdatedActivity;
+        }
+    }
 }

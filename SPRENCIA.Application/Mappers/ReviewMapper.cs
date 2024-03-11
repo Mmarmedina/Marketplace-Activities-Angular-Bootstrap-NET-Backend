@@ -45,6 +45,7 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
+        //  Mapear un objeto tipo entidad (Review) a una un objeto tipo DTO (ReviewWithActivityIdDto).
         public static ReviewWithActivityIdDto MapToReviewWithActivityIdDto(Review review)
         {
             ReviewWithActivityIdDto reviewWithActivityIdDto = new ReviewWithActivityIdDto();

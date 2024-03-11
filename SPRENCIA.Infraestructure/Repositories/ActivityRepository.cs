@@ -2,6 +2,7 @@
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
+using SPRENCIA.Infraestructure.Mappers;
 
 
 namespace SPRENCIA.Infraestructure.Repositories
@@ -43,6 +44,38 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityDto;
 
         }
+
+        public async Task<Activity> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
+        {
+            // Primero buscar la actividad en BBDD.
+            Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
+
+            // El objeto que devuelve la BBDD (actividad) se le asignan los valores que ha enviado el frontend.
+            Activity activityUpdated = ActivityMapper.MapToActivityFromActivityUpdatedRequestDto(searchUpdatedActivity, activityUpdateRequestDto);
+
+            // Modificar el contexto en la memoria y guardar los cambios en BBDD.
+            _context.Activities.Update(activityUpdated);
+            _context.SaveChanges();
+
+            return activityUpdated;
+        }
+
+        /*
+        public async Task<Activity> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
+        {
+            // Primero buscar la actividad en BBDD.
+            Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
+
+            // El objeto que devuelve la BBDD (actividad) se le asignan los valores que ha enviado el frontend.
+            Activity activityUpdated = ActivityMapper.MapToActivityFromActivityUpdatedRequestDto(searchUpdatedActivity, activityUpdateRequestDto);
+
+            // Modificar el contexto en la memoria y guardar los cambios en BBDD.
+            _context.Activities.Update(activityUpdated);
+            _context.SaveChanges();
+
+            return activityUpdated;
+        }
+        */
 
         // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)

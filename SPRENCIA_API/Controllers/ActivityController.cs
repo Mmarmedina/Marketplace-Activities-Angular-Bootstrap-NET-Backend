@@ -45,6 +45,24 @@ namespace SPRENCIA_API.Controllers
                 return Ok(activityAdded);
             }
         }
+
+        [HttpPut]
+        [Route("UpdateActivity")]
+
+        public async Task<ActionResult> Update([FromBody] ActivityUpdatedRequestDto activityUpdatedRequestDto)
+        {
+            ActivityDto activityUpdated = await _activityService.Update(activityUpdatedRequestDto);
+
+            if (activityUpdated == null)
+            {
+                return BadRequest("La actividad no ha podido editarse. Petición denegada");
+            }
+            else
+            {
+                return Ok(activityUpdated);
+            }
+
+        }
       
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById(int id)

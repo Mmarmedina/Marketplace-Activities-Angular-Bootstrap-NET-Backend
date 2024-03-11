@@ -6,12 +6,10 @@ namespace SPRENCIA.Infraestructure.Contracts
     public interface IActivityRepository
     {
         Task<List<Activity>> GetAll();
-
         Task<Activity> GetById(int id);
-
         Task<ActivityDto> Create(ActivityAddRequestDto newActivity);
-
+        Task<Activity?> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto);
         Task<bool> DeleteById(int id);
-
+        
     }
 }
