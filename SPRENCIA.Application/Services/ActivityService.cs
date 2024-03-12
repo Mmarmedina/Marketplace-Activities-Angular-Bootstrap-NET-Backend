@@ -109,11 +109,30 @@ namespace SPRENCIA.Application.Services
             return activityResponseDto;
         }
 
-        // Método para actualizar una actividad existente.
+        // MMM Método para actualizar una actividad existente.
         public async Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto)
         {
-            ActivityDto? activityUpdatedDto = await _activityRepository.Update(activityUpdatedRequestDto);
-            return activityUpdatedDto;
+            ActivityDto? activityUpdatedDto = null;
+
+            // Al servicio llega un objeto que se compone de la entidad Activity (con la actividad editada), la entidad Reviews (con las opiniones asociadas a la actividad) y la unión de ActivitiesSchedules y Schedules con la información de los horarios de la actividad modificada.
+            ActivityUpdateResponse activityUpdatedResponse = await _activityRepository.Update(activityUpdatedRequestDto);
+
+            // Se extran los tres objetos que están dentro de activityUpdatedResponse.
+            Activity updatedActivity = activityUpdatedResponse.Activity;
+            List<ActivitiesSchedulesSchedules> activitySchedules = activityUpdatedResponse.ActivitySchedulesSchedules;
+            List<Review> activityReviews = activityUpdatedResponse.Reviews;
+            
+            // Se convierten los tres objetos tipo entidad a tipo DTO (de Activity a ActivityDto).
+            ActivityDto updatedActivityDto = ActivityMapper.MapToActivityDto(updatedActivity);
+
+            List<ScheduleDto> schedulesFromActivityUpdate = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesSchedules(updatedActivity, activitySchedules);
+
+            List<ReviewWithActivityIdDto>? activityReviewsDto = ReviewMapper.MapToReviewsWithActivityIdDto(activityReviews);
+
+            // Se crea un ActiviDto con los tres DTOs anteriores para enviarlos al frontend.
+            ActivityDto activityUpdatedResponseDto = ActivityMapper.MapToResponseActivityDto(updatedActivityDto, schedulesFromActivityUpdate, activityReviewsDto);
+
+            return activityUpdatedResponseDto;
         }
 
         // MMM Método para borrar una actividad de la BBDD.

@@ -40,7 +40,7 @@ namespace SPRENCIA.Application.Mappers
                 // MMM Lógica para asignar los horarios a cada actividad.
 
                 // Mapear convertir lista de objetos tipo Activities_Schedules + Schedules en SchedulesDto.
-                List<ScheduleDto> schedulesForActivity = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesSchedules(activityDto, activitiesShedulesDto);
+                List<ScheduleDto> schedulesForActivity = ScheduleMapper.MapToSchedulesDto(activityDto, activitiesShedulesDto);
 
                 // Se asigna la lista de horarios filtrados (schedulesForActivity) a la propiedad Schedule de la actividad actual.
                 activityResponseDto.Schedule = schedulesForActivity;

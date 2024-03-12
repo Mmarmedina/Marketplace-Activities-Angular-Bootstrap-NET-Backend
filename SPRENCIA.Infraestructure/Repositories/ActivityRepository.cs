@@ -44,7 +44,7 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
-        public async Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
+        public async Task<ActivityUpdateResponse> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
         {
             // Primero buscar la actividad en BBDD.
             Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
@@ -54,9 +54,6 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             // Actualizar la actividad en BBDD.
             _context.Activities.Update(activityUpdated);
-
-            // Convertir objeto tipo entidad a tipo DTO (de Activity a ActivityDto).
-            ActivityDto activityUpdatedDto = ActivityMapper.MapToActivityDtoFromEntity(activityUpdated);
 
             // Recuperar el horario/s de la actividad de la BBDD (entidad ActivitiesSchedules).
             List<ActivitiesSchedules> searchUpdateScheduleActivity = await _context.ActivitiesSchedules.Where(sa => sa.ActivityId == activityUpdateRequestDto.Id).ToListAsync();
@@ -85,22 +82,19 @@ namespace SPRENCIA.Infraestructure.Repositories
            // Recuperar activities_schedules y schedules de la actividad editada (para preparar ScheduleDto dentro de ActivityDto).
             List<ActivitiesSchedulesSchedules> activitiyWithSchedules = await GetByIdWithSchedules(activityUpdateRequestDto.Id);
 
-            // Llamar al metodo de ScheduleMapper que convierte ActivtiesSchedules y Schedules en DTO de SchedulesDto para poder devolverlo al frontend dentro de ActivityDto.
-            List<ScheduleDto> schedulesDtoFromActivityUpdate = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesActivities(activityUpdatedDto, activitiyWithSchedules);
-
             // Recuperar las opiniones de la actividad.
             List<Review> activityReviews = await _context.Reviews.Where(r => r.Id == activityUpdateRequestDto.Id).ToListAsync();
 
-            // Convertir en DTO las opiniones de la actividad. 
-            List<ReviewWithActivityIdDto>? activityReviewsDto = ReviewMappers.MapToReviewsWithActivityIdDto(activityReviews);
+            ActivityUpdateResponse activityUpdateResponse = new ActivityUpdateResponse
+            {
+                ActivitySchedulesSchedules = activitiyWithSchedules,
+                Reviews = activityReviews,
+                Activity = activityUpdated
+            };
 
-            // Construir el DTO de salida ActivityDto
-            ActivityDto activityUpdatedResponseDto = ActivityMapper.MapToResponseActivityDto(activityUpdatedDto, schedulesDtoFromActivityUpdate, activityReviewsDto);
-
-            return activityUpdatedResponseDto;
+            return activityUpdateResponse;
 
         }
-        
 
         // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)
@@ -114,25 +108,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             }
 
             return false;
-        }
-
-        // MMM Recuperar todos los registros activities_schedules + Activities (inner join entre ambas entidades).
-        public async Task<List<ActivitiesSchedulesActivities>> GetByIdWithSchedules(ActivityUpdatedRequestDto activityUpdateRequestDto)
-        {
-            List<ActivitiesSchedulesActivities> activityWithSchedules = await _context.ActivitiesSchedules
-                .Where(sa => sa.ActivityId == activityUpdateRequestDto.Id)
-                .Join(
-                _context.Activities,
-                   sa => sa.ActivityId,
-                   a => a.Id,
-                   (sa, a) => new ActivitiesSchedulesActivities
-                   {
-                       ActivitiesSchedules = new List<ActivitiesSchedules> { sa },
-                       Activities = new List<Activity> { a }
-                   })
-               .ToListAsync();
-
-            return activityWithSchedules;
         }
 
         // MMM Recuperar todos los registros activities_schedules + schedules de una actividad (inner join entre ambas entidades) para tener la información actividad, el id y el name de horario.
@@ -153,5 +128,25 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return activitiesWithSchedules;
         }
+
+        /* MMM Recuperar todos los registros activities_schedules + Activities (inner join entre ambas entidades).
+        public async Task<List<ActivitiesSchedulesActivities>> GetByIdWithSchedules(ActivityUpdatedRequestDto activityUpdateRequestDto)
+        {
+            List<ActivitiesSchedulesActivities> activityWithSchedules = await _context.ActivitiesSchedules
+                .Where(sa => sa.ActivityId == activityUpdateRequestDto.Id)
+                .Join(
+                _context.Activities,
+                   sa => sa.ActivityId,
+                   a => a.Id,
+                   (sa, a) => new ActivitiesSchedulesActivities
+                   {
+                       ActivitiesSchedules = new List<ActivitiesSchedules> { sa },
+                       Activities = new List<Activity> { a }
+                   })
+               .ToListAsync();
+
+            return activityWithSchedules;
+        }
+        */
     }
 }

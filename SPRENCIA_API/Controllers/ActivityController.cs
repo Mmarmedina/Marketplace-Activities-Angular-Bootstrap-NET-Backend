@@ -51,15 +51,15 @@ namespace SPRENCIA_API.Controllers
 
         public async Task<ActionResult> Update([FromBody] ActivityUpdatedRequestDto activityUpdatedRequestDto)
         {
-            ActivityDto activityUpdated = await _activityService.Update(activityUpdatedRequestDto);
+            ActivityDto activityUpdatedResponseDto = await _activityService.Update(activityUpdatedRequestDto);
 
-            if (activityUpdated == null)
+            if (activityUpdatedResponseDto == null)
             {
                 return BadRequest("La actividad no ha podido editarse. Petición denegada");
             }
             else
             {
-                return Ok(activityUpdated);
+                return Ok(activityUpdatedResponseDto);
             }
 
         }

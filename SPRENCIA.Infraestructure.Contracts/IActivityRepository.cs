@@ -8,7 +8,7 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<List<Activity>> GetAll();
         Task<Activity> GetById(int id);
         Task<ActivityDto> Create(ActivityAddRequestDto newActivity);
-        Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto);
+        Task<ActivityUpdateResponse> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto);
         Task<bool> DeleteById(int id);
         
     }
