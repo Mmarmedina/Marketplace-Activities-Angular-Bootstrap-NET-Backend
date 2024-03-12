@@ -63,8 +63,6 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             // Eliminar los registros existentes en ActivitiesSchedules
             _context.ActivitiesSchedules.RemoveRange(searchUpdateScheduleActivity);
-
-            // TODO: Lo siguiente puede llevar a Mappers y usar un método. 
             
             // Insertar los nuevos registros en ActivitiesShedules con los nuevos horarios.
             List<ActivitiesSchedules> activitySchedulesUpdated = new List<ActivitiesSchedules>();
@@ -102,62 +100,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityUpdatedResponseDto;
 
         }
-
-        /* Con esto funciona.
-         public async Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
-        {
-            // Primero buscar la actividad en BBDD.
-            Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
-
-            // El objeto que devuelve la BBDD (actividad) se le asignan los valores actualizados que ha enviado el frontend.
-            Activity activityUpdated = ActivityMapper.MapToActivityFromActivityUpdatedRequestDto(activityUpdateRequestDto, searchUpdatedActivity);
-
-            // Convertir objeto tipo entidad a tipo DTO (de Activity a ActivityDto).
-            ActivityDto activityUpdatedDto = ActivityMapper.MapToActivityDtoFromEntity(activityUpdated);
-
-            // Actualizar la actividad en BBDD.
-            _context.Activities.Update(activityUpdated);
-
-            // Recuperar el horario/s de la actividad de la BBDD (entidad ActivitiesSchedules).
-            List<ActivitiesSchedules> searchUpdateScheduleActivity = await _context.ActivitiesSchedules.Where(sa => sa.ActivityId == activityUpdateRequestDto.Id).ToListAsync();
-
-            // Eliminar los registros existentes en ActivitiesSchedules
-            _context.ActivitiesSchedules.RemoveRange(searchUpdateScheduleActivity);
-
-            // TODO: Esto se puede llevar a Mappers y usar un método. 
-            
-            // Insertar los nuevos registros en ActivitiesShedules con los nuevos horarios.
-            List<ActivitiesSchedules> activitySchedulesUpdated = new List<ActivitiesSchedules>();
-
-            // La información que envía el frontend proporciona tanto el Id de la actividad como una lista con de enteros con los horarios.
-            // Se crea una lista de objetos de la entidad ActivitiesSchedules.
-            // Se recorre la lista de enteros con los Id de los horarios (contenidos en activityUpdateRequestDto.ScheduleId), en cada vuelta se crea un objeto con el Id del horario y el Id de la actividad.
-            foreach (int ScheduleId in activityUpdateRequestDto.ScheduleId)
-            {
-                ActivitiesSchedules activityScheduleUpdated = new ActivitiesSchedules();
-                activityScheduleUpdated.ActivityId = activityUpdateRequestDto.Id;
-                activityScheduleUpdated.ScheduleId = ScheduleId;
-
-                _context.ActivitiesSchedules.Add(activityScheduleUpdated);
-            }
-
-            // Guardar los cambios. 
-            _context.SaveChanges();
-
-           // Recuperar activities_schedules y schedules de la actividad editada.
-            List<ActivitiesSchedulesSchedules> activitiyWithSchedules = await GetByIdWithSchedules(activityUpdateRequestDto.Id);
-
-            // Llamar al metodo de ScheduleMapper que convierte ActivtiesSchedules y Schedules en DTO de Schedules para poder devolverlo al frontend dentro de ActivityDto.
-            List<ScheduleDto> schedulesDtoFromActivityUpdate = ScheduleMapper.MapToSchedulesDtoFromJoinActivitiesSchedulesActivities(activityUpdatedDto, activitiyWithSchedules);
-
-            ActivityDto activityUpdatedResponseDto = ActivityMapper.MapToResponseActivityDto(activityUpdatedDto, schedulesDtoFromActivityUpdate);
-
-            return activityUpdatedResponseDto;
-
-        }
-
-        */
-
 
         // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)

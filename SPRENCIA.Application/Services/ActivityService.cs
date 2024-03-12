@@ -110,6 +110,7 @@ namespace SPRENCIA.Application.Services
             return activityResponseDto;
         }
 
+        // Método para actualizar una actividad existente.
         public async Task<ActivityDto> Update(ActivityUpdatedRequestDto activityUpdatedRequestDto)
         {
             ActivityDto? activityUpdatedDto = await _activityRepository.Update(activityUpdatedRequestDto);

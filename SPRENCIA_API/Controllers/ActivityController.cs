@@ -78,7 +78,5 @@ namespace SPRENCIA_API.Controllers
             }
         }
 
-        // TODO: método PUT para editar una actividad que ya está en BBDD.
-
     }
 }

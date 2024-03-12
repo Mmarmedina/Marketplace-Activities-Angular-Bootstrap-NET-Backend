@@ -1,4 +1,5 @@
-﻿using SPRENCIA.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Infraestructure.Mappers
@@ -44,47 +45,6 @@ namespace SPRENCIA.Infraestructure.Mappers
 
             return searchUpdatedActivity;
         }
-
-        /* Petición POST de actividades. Una vez que actualiza la actividad en BBSS, se usa este método para devolver un DTO con la información de la actividad ya editada (incluye datos de la actividad y el ID del horario).
-        public static ActivityDto MapToResponseActivitityUpdateDto(Activity activityUpdated, List<ActivitiesSchedulesActivities> activitiesShedulesActivities)
-        {
-            ActivityDto activityResponseDto = new ActivityDto();
-
-            // Aquí se coge la actividad actualizada de la base de datos y se mapea para que sea ActivityDto. 
-            ActivityDto activityUpdatedDto = ActivityMapper.MapToActivityDtoFromEntity(activityUpdated);
-
-            // Lógica para crear el ScheduleDto, con la información del horario de la actividad para devolver al frontend.
-            // Se crea un objeto del tipo ScheduleDto(que tendrá el ID del horario y el horario).
-            List<ScheduleDto> schedulesForActivity = new List<ScheduleDto>();
-
-            // Se ha recibido por parémetro una lista que es la suma de ActivitiesSchedules + Activities.
-            // Se usa un bucle anidado para iterar dentro de la tabla ActivitiesSchedules que está dentro de activitiesShedulesDto. 
-            foreach (ActivitiesSchedulesActivities activitiesShedulesActivitiesItem in activitiesShedulesActivities)
-            {
-                foreach (ActivitiesSchedules activitySchedule in activitiesShedulesActivitiesItem.ActivitiesSchedules)
-                {
-                    // Si el ID de la actividad (contenido en activityDto) conincide con el ID de la actividad de la tabla intermedia (activities_schedules), se crea un objeto ScheduleDto, con el ID del horario y el Name de éste. 
-                    if (activitySchedule.ActivityId == activityUpdated.Id)
-                    {
-                        ScheduleDto scheduleDto = new ScheduleDto()
-                        {
-                            Id = activitySchedule.ScheduleId,
-                            // Name = activitySchedule.Schedule.Name (no se puede poner porque activitiesSchedules no tiene el name). 
-                        };
-                        // Cada objeto creado en cada vuelta se añade a schedulesForActivities.
-                        schedulesForActivity.Add(scheduleDto);
-                    }
-                }
-            }
-
-            ActivityDto responseActivityDto = ActivityMapper.MapToResponseActivityDto(activityUpdatedDto, schedulesForActivity);
-
-            // activityUpdatedDto.Schedule = schedulesForActivity;
-
-            return responseActivityDto;
-
-        }
-        */
 
         // MMM Crear un OBJETO ActivityDto que contenga información de la actividad y los horarios para devolverlo al frontend una vez ha sido editada la actividad y guardada en la BBDD.
         public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedulesDto, List<ReviewWithActivityIdDto> reviewsDto)
