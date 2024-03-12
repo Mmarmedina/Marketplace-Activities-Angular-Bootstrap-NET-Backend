@@ -6,7 +6,7 @@ namespace SPRENCIA.Infraestructure.Mappers
     public class ActivityMapper
 
     {
-        // MMM Mapear los datos de un objeto ActivityAddRequestDto a un objeto Activity, para poder insertar una nueva actividad en BBDD.
+        // MMM Convertir un objeto ActivityAddRequestDto a un objeto Activity para poder insertar una nueva actividad en BBDD.
         public static Activity MapToActivity(ActivityAddRequestDto newActivity)
         {
             // Está asignando el objeto newActivity (que es del tipo ActivityAddRequestDto) a una nueva variable llamada actividadRequestDto, del mismo tipo. 
@@ -21,7 +21,7 @@ namespace SPRENCIA.Infraestructure.Mappers
             return activity;
         }
 
-        // MMM Mapear los datos de una entidad Activity a un objeto DTO (ActivityDto).
+        // MMM Convertir un objeto Activity en ActivityDto (solo con la información de la actividad). No se incluyen horarios ni opiniones.
         public static ActivityDto MapToActivityDtoFromEntity(Activity activityAdded)
         {
             ActivityDto activityDto = new ActivityDto();
@@ -34,7 +34,7 @@ namespace SPRENCIA.Infraestructure.Mappers
 
         }
 
-        // La actividad que se quiere actualizar se recupera de la base de datos (searchUpdatedActivity) y se le asignan los valores que ha enviado el frontend.
+        // MMM Petición POST de actividades. La actividad que se quiere actualizar se recupera de la base de datos (searchUpdatedActivity) y se le asignan los valores que ha enviado el frontend (sólo los datos relativos a la actividad).
         public static Activity MapToActivityFromActivityUpdatedRequestDto(ActivityUpdatedRequestDto activityUpdatedRequestDto, Activity searchUpdatedActivity)
         {
             searchUpdatedActivity.Id = activityUpdatedRequestDto.Id;
@@ -45,12 +45,12 @@ namespace SPRENCIA.Infraestructure.Mappers
             return searchUpdatedActivity;
         }
 
-        // Una vez que actualiza la actividad método para devolver un DTO con la información editada de la actividad y su horario.
+        // Petición POST de actividades. Una vez que actualiza la actividad en BBSS, se usa este método para devolver un DTO con la información de la actividad ya editada (incluye datos de la actividad y el ID del horario).
         public static ActivityDto MapToResponseActivitityUpdateDto(Activity activityUpdated, List<ActivitiesSchedulesActivities> activitiesShedulesActivities)
         {
             ActivityDto activityResponseDto = new ActivityDto();
 
-            // Aquí se coge la actividad actualizada de la base de datos y se mapea pra que se activityDto. 
+            // Aquí se coge la actividad actualizada de la base de datos y se mapea para que sea ActivityDto. 
             ActivityDto activityUpdatedDto = ActivityMapper.MapToActivityDtoFromEntity(activityUpdated);
 
             // Lógica para crear el ScheduleDto, con la información del horario de la actividad para devolver al frontend.
@@ -63,13 +63,13 @@ namespace SPRENCIA.Infraestructure.Mappers
             {
                 foreach (ActivitiesSchedules activitySchedule in activitiesShedulesActivitiesItem.ActivitiesSchedules)
                 {
-                    // Si el ID de la actividad (contenido en activityDto) conincide con el ID de la actividad de la tabla intermedia (activities_schedules), se crea un objeto ScheduleDto, con el ID del horario y su el Name de éste. 
+                    // Si el ID de la actividad (contenido en activityDto) conincide con el ID de la actividad de la tabla intermedia (activities_schedules), se crea un objeto ScheduleDto, con el ID del horario y el Name de éste. 
                     if (activitySchedule.ActivityId == activityUpdated.Id)
                     {
                         ScheduleDto scheduleDto = new ScheduleDto()
                         {
                             Id = activitySchedule.ScheduleId,
-                            // Name = activitySchedule.Schedule.Name
+                            // Name = activitySchedule.Schedule.Name (no se puede poner porque activitiesSchedules no tiene el name). 
                         };
                         // Cada objeto creado en cada vuelta se añade a schedulesForActivities.
                         schedulesForActivity.Add(scheduleDto);
@@ -77,17 +77,15 @@ namespace SPRENCIA.Infraestructure.Mappers
                 }
             }
 
-            activityUpdatedDto.Schedule = schedulesForActivity;
+            ActivityDto responseActivityDto = ActivityMapper.MapToResponseActivityDto(activityUpdatedDto, schedulesForActivity);
 
-            return activityResponseDto;
+            // activityUpdatedDto.Schedule = schedulesForActivity;
+
+            return responseActivityDto;
 
         }
 
-        // Crear un ActivityDto para enviar al servicio. 
-
-
-
-        /*
+        // MMM Crear un OBJETO ActivityDto que contenga información de la actividad y los horarios para devolverlo al frontend una vez ha sido editada la actividad y guardada en la BBDD.
         public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules)
         {
             ActivityDto responseActivityDto = new ActivityDto();
@@ -96,26 +94,9 @@ namespace SPRENCIA.Infraestructure.Mappers
             responseActivityDto.Description = activityDto.Description;
             responseActivityDto.Price = activityDto.Price;
             responseActivityDto.Schedule = schedules;
-            
 
             return responseActivityDto;
         }
-
-        public static Schedule MaptToScheduleDtoFromActivityUpdatedRequestDto(List<ActivitiesSchedules> searchUpdateScheduleActivity)
-        {
-            foreach (ActivitiesSchedules schedule in searchUpdateScheduleActivity)
-            {
-                ScheduleDto scheduleDto = new Schedule();
-                scheduleDto.Id = schedule.Id;
-
-            }
-
-            return 
-        }
-
-        */
-
-
 
     }
 }

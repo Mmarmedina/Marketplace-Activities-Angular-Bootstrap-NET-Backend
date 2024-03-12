@@ -73,6 +73,18 @@ namespace SPRENCIA.Application.Mappers
             
         }
 
+        // MMM Convertir UN OBJETO tipo Actividad a objeto tipo ActivityDto (solo información de la actividad, sin horarios ni opiniones).
+        public static ActivityDto MapToActivityDto(Activity activity)
+        {
+            ActivityDto activityDto = new ActivityDto();
+            activityDto.Id = activity.Id;
+            activityDto.Title = activity.Title;
+            activityDto.Description = activity.Description;
+            activityDto.Price = activity.Price;
+
+            return activityDto;
+        }
+
         // MMM Convertir LISTA de objetos tipo Actividad a lista de objetos tipo ActivityDto (solo información de la actividad, sin horarios ni opiniones).
         public static List<ActivityDto> MapToActivitiesDto(List<Activity> activities)
         {
@@ -89,16 +101,6 @@ namespace SPRENCIA.Application.Mappers
 
         }
 
-        // MMM Convertir UN OBJETO tipo Actividad a objeto tipo ActivityDto (solo información de la actividad, sin horarios ni opiniones).
-        public static ActivityDto MapToActivityDto(Activity activity)
-        {
-            ActivityDto activityDto = new ActivityDto();
-            activityDto.Id = activity.Id;
-            activityDto.Title = activity.Title;
-            activityDto.Description = activity.Description;
-            activityDto.Price = activity.Price;
-
-            return activityDto;
-        }
+        
     }
 }
