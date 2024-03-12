@@ -45,7 +45,7 @@ namespace SPRENCIA.Infraestructure.Mappers
             return searchUpdatedActivity;
         }
 
-        // Petición POST de actividades. Una vez que actualiza la actividad en BBSS, se usa este método para devolver un DTO con la información de la actividad ya editada (incluye datos de la actividad y el ID del horario).
+        /* Petición POST de actividades. Una vez que actualiza la actividad en BBSS, se usa este método para devolver un DTO con la información de la actividad ya editada (incluye datos de la actividad y el ID del horario).
         public static ActivityDto MapToResponseActivitityUpdateDto(Activity activityUpdated, List<ActivitiesSchedulesActivities> activitiesShedulesActivities)
         {
             ActivityDto activityResponseDto = new ActivityDto();
@@ -84,16 +84,18 @@ namespace SPRENCIA.Infraestructure.Mappers
             return responseActivityDto;
 
         }
+        */
 
         // MMM Crear un OBJETO ActivityDto que contenga información de la actividad y los horarios para devolverlo al frontend una vez ha sido editada la actividad y guardada en la BBDD.
-        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules)
+        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedulesDto, List<ReviewWithActivityIdDto> reviewsDto)
         {
             ActivityDto responseActivityDto = new ActivityDto();
             responseActivityDto.Id = activityDto.Id;
             responseActivityDto.Title = activityDto.Title;
             responseActivityDto.Description = activityDto.Description;
             responseActivityDto.Price = activityDto.Price;
-            responseActivityDto.Schedule = schedules;
+            responseActivityDto.Schedule = schedulesDto;
+            responseActivityDto.Review = reviewsDto;
 
             return responseActivityDto;
         }

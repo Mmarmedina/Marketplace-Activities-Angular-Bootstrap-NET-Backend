@@ -6,15 +6,15 @@ namespace SPRENCIA.Application.Mappers
     public class ActivityMapper
     {
         // MMM Crear un OBJETO ActivityDto que contenga información de la actividad, los horarios y las opiniones para enviar al frontend (suma DTO ActivityDto, ScheduleDto, ReviewDto).
-        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedules, List<ReviewWithActivityIdDto> reviews)
+        public static ActivityDto MapToResponseActivityDto(ActivityDto activityDto, List<ScheduleDto> schedulesDto, List<ReviewWithActivityIdDto> reviewsDto)
         {
             ActivityDto responseActivityDto = new ActivityDto();
             responseActivityDto.Id = activityDto.Id;
             responseActivityDto.Title = activityDto.Title;
             responseActivityDto.Description = activityDto.Description;
             responseActivityDto.Price = activityDto.Price;
-            responseActivityDto.Schedule = schedules;
-            responseActivityDto.Review = reviews;
+            responseActivityDto.Schedule = schedulesDto;
+            responseActivityDto.Review = reviewsDto;
 
             return responseActivityDto;
         }
