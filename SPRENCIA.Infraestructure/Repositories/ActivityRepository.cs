@@ -4,8 +4,6 @@ using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 using SPRENCIA.Infraestructure.Mappers;
 
-
-
 namespace SPRENCIA.Infraestructure.Repositories
 {
     public class ActivityRepository : IActivityRepository
@@ -63,18 +61,17 @@ namespace SPRENCIA.Infraestructure.Repositories
             // Eliminar los registros existentes en ActivitiesSchedules
             _context.ActivitiesSchedules.RemoveRange(searchUpdateScheduleActivity);
 
+            // Borrar: comprobar si se han borrado los registros
+            List<ActivitiesSchedules> checkDelete = await _context.ActivitiesSchedules.Where(sa => sa.ActivityId == activityUpdateRequestDto.Id).ToListAsync();
+
             // Insertar los nuevos registros en ActivitiesShedules con los nuevos horarios.
-            // Crear una lista de ActivitiesSchedules 
-
-            // Del ActivityUpdatedRequestDto tengo el ID, y el scheduleID
-
             List<ActivitiesSchedules> activitySchedulesUpdated = new List<ActivitiesSchedules>();
-           
-            foreach (ActivitiesSchedules schedule in searchUpdateScheduleActivity)
+            
+            foreach (int ScheduleId in activityUpdateRequestDto.ScheduleId)
             {
                 ActivitiesSchedules activityScheduleUpdated = new ActivitiesSchedules();
-                activityScheduleUpdated.ActivityId = schedule.ActivityId;
-                activityScheduleUpdated.ScheduleId = schedule.ScheduleId;
+                activityScheduleUpdated.ActivityId = activityUpdateRequestDto.Id;
+                activityScheduleUpdated.ScheduleId = ScheduleId;
 
                 _context.ActivitiesSchedules.Add(activityScheduleUpdated);
             }
@@ -85,6 +82,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             // Método que devuelve una la actividad y sus horarios (innher join (activities + activitiesSchedules).
             List<ActivitiesSchedulesActivities> activityWithSchedules = await GetByIdWithSchedules(activityUpdateRequestDto);
 
+            // Método para mapear y devolver al servicio objeto del tipo ActivityDto.
             ActivityDto activityUpdatedDto = ActivityMapper.MapToResponseActivitityUpdateDto(activityUpdated, activityWithSchedules);
 
             return activityUpdatedDto;
@@ -109,101 +107,6 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return activityWithSchedules;
         }
-
-        /*
-         * // MMM Recuperar todos los registros activities_schedules + schedules (inner join entre ambas entidades).
-        public async Task<List<ActivitiesSchedulesSchedules>> GetByIdWithSchedules(int id)
-        {
-            List<ActivitiesSchedulesSchedules> activityWithSchedules = await _context.ActivitiesSchedules
-                .Where(sa => sa.ActivityId == id)
-                .Join(
-                _context.Schedules,
-                   sa => sa.ScheduleId,
-                   s => s.Id,
-                   (sa, s) => new ActivitiesSchedulesSchedules
-                   {
-                       ActivitiesSchedules = new List<ActivitiesSchedules> { sa },
-                       Schedules = new List<Schedule> { s }
-                   })
-               .ToListAsync();
-
-            return activityWithSchedules;
-        }
-        */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-         * public async Task<Activity> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
-        {
-            // Primero buscar la actividad en BBDD.
-            Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
-
-            // El objeto que devuelve la BBDD (actividad) se le asignan los valores que ha enviado el frontend.
-            Activity activityUpdated = ActivityMapper.MapToActivityFromActivityUpdatedRequestDto(activityUpdateRequestDto, searchUpdatedActivity);
-
-            // Actualizar la actividad en BBDD.
-            _context.Activities.Update(activityUpdated);
-
-            // Recuperar el horario/s de la actividad de la BBDD (entidad ActivitiesSchedules).
-            List<ActivitiesSchedules> searchUpdateScheduleActivity = await _context.ActivitiesSchedules.Where(sa => sa.ActivityId == activityUpdateRequestDto.Id).ToListAsync();
-
-            // Eliminar los registros existentes en ActivitiesSchedules
-            _context.ActivitiesSchedules.RemoveRange(searchUpdateScheduleActivity);
-
-            // Insertar los nuevos registros en ActivitiesShedules con los nuevos horarios.
-            foreach (ActivitiesSchedules schedule in searchUpdateScheduleActivity)
-            {
-                _context.ActivitiesSchedules.Add(new ActivitiesSchedules
-                {
-                    ActivityId = schedule.ActivityId,
-                    ScheduleId = schedule.ScheduleId,
-                });
-            }
-
-            // Guardar los cambios. 
-            _context.SaveChanges();
-
-            return activityUpdated;
-        }
-
-        */
-
-
-        /*
-        public async Task<Activity> Update(ActivityUpdatedRequestDto activityUpdateRequestDto)
-        {
-            // Primero buscar la actividad en BBDD.
-            Activity? searchUpdatedActivity = await _context.Activities.Where(a => a.Id == activityUpdateRequestDto.Id).FirstOrDefaultAsync();
-
-            // El objeto que devuelve la BBDD (actividad) se le asignan los valores que ha enviado el frontend.
-            Activity activityUpdated = ActivityMapper.MapToActivityFromActivityUpdatedRequestDto(searchUpdatedActivity, activityUpdateRequestDto);
-
-            // Modificar el contexto en la memoria y guardar los cambios en BBDD.
-            _context.Activities.Update(activityUpdated);
-            _context.SaveChanges();
-
-            return activityUpdated;
-        }
-        */
 
         // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)

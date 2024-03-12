@@ -15,5 +15,7 @@ namespace SPRENCIA.Domain.Models
         [ForeignKey("ScheduleId")]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
+
+
     }
 }
