@@ -100,6 +100,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             return activityUpdatedResponseDto;
 
         }
+        
 
         // MMM Método que pide a la base de datos eliminar una actividad.
         public async Task<bool> DeleteById(int id)

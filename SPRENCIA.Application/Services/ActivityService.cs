@@ -91,7 +91,6 @@ namespace SPRENCIA.Application.Services
 
                 // Al crear la actividad se indica uno o varios horarios para ésta. El horario de la nueva actividad se debe insertar en la entidad activities_schedules.
                 // El activityID se saca de la variable activityAdded (que se crea tras insertar la nueva actividad en BBDD), y el horario se saca del DTO de entrada (ActivityAddRequestDto) que incluye el horario que se le ha asignado a la actividad desde el frontend.
-                
                 ActivitiyScheduleDto activitySchedule = ActivitiesSchedulesMapper.MapToActivitiesSchedulesDto(newActivity, activityAdded);
 
                 // Insertar los horarios de la nueva actividad en la tabla activities_schedules.
