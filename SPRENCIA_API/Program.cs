@@ -6,6 +6,20 @@ namespace SPRENCIA_API
 {
     public class Program
     {
+        /* MMM 
+        builder.Services.AddCors(options => 
+        {
+            options.AddPolicy("NuevaPolítica", app =>
+            {
+                app.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+                
+            });
+
+        });*/
+
+        
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
@@ -15,5 +29,12 @@ namespace SPRENCIA_API
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
+
+        // app.UseCors("NuevaPolítica");
+
     }
+
+
 }
+
+

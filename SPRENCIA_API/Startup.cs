@@ -4,6 +4,7 @@ namespace SPRENCIA_API
 {
     public class Startup
     {
+        
         public Startup(IHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -35,6 +36,19 @@ namespace SPRENCIA_API
                     Title = "Sprencia: Marketplace Actividades Formativas para Seniors"
                 });
             });
+
+            // MMM 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("NuevaPolítica", app =>
+                {
+                    app.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                });
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +68,9 @@ namespace SPRENCIA_API
             {
                 cfg.SwaggerEndpoint("./v1/swagger.json", "Sprencia API");
             });
+
+            // MMM
+            app.UseCors("NuevaPolítica");
 
             app.UseHttpsRedirection();
             app.UseMvc();
