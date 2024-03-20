@@ -28,6 +28,7 @@ namespace SPRENCIA.CrossCutting.Configuration
         {
             services.AddTransient<IActivityService, ActivityService>();
             services.AddTransient<IReviewService, ReviewService>();
+            services.AddTransient<IScheduleService, ScheduleService>();
 
             return services;    
         }
