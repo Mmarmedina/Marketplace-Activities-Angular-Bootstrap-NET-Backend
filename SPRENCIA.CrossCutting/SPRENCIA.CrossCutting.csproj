@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SPRENCIA.Application.Contracts\SPRENCIA.Application.Contracts.csproj" />
+    <ProjectReference Include="..\SPRENCIA.Application\SPRENCIA.Application.csproj" />
+    <ProjectReference Include="..\SPRENCIA.CrossCutting.Contracts\SPRENCIA.CrossCutting.Contracts.csproj" />
+    <ProjectReference Include="..\SPRENCIA.Infraestructure\SPRENCIA.Infraestructure.csproj" />
+  </ItemGroup>
+
+</Project>
