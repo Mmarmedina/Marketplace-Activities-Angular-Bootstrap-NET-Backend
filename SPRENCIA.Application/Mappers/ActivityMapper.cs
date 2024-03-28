@@ -55,7 +55,9 @@ namespace SPRENCIA.Application.Mappers
                         {
                             Id = reviewDto.Id,
                             ReviewText = reviewDto.ReviewText,
-                            ActivityId = reviewDto.ActivityId
+                            Author = reviewDto.Author,
+                            Date = reviewDto.Date,
+                            ActivityId = reviewDto.ActivityId,
                         };
 
                         reviewsForActivity.Add(reviewDtoItem);
