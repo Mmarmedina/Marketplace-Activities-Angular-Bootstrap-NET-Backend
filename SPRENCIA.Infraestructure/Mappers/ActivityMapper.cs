@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SPRENCIA.Domain.Models;
+﻿using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Infraestructure.Mappers
@@ -43,7 +42,7 @@ namespace SPRENCIA.Infraestructure.Mappers
             searchUpdatedActivity.Description = activityUpdatedRequestDto.Description;
             searchUpdatedActivity.Price = activityUpdatedRequestDto.Price;
 
-            return searchUpdatedActivity;
+            return searchUpdatedActivity; 
         }
 
         // MMM Crear un OBJETO ActivityDto que contenga información de la actividad y los horarios para devolverlo al frontend una vez ha sido editada la actividad y guardada en la BBDD.
