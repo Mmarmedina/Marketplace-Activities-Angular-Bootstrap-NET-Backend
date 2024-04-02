@@ -6,11 +6,10 @@
         // ReviewDto sólo incluye el ID y ReviewText. 
         // Para algunas peticiones interesa mostrar también la actividad asociada a la opinión y se ha creado este DTO: ReviewWithActivityIdDto. 
         public int Id { get; set; }
-
-        public string ReviewText { get; set; }
-
+        public string ReviewText { get; set; }       
+        public string Author { get; set; }
+        public DateOnly Date { get; set; }
         public int? ActivityId { get; set; }
 
-    }
-    
+    }    
 }
