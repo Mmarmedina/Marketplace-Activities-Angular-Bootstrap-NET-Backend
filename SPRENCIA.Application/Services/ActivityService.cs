@@ -38,10 +38,10 @@ namespace SPRENCIA.Application.Services
             // Se recuperan todos los registros de la entidad Review.
             List<Review> reviews = await _reviewRepository.GetAll();
 
-            // Se 
+            // Se mapean la lista de objetos tipo review a lista de objeto tipo ReviewWithActivityIdDto.
             List<ReviewWithActivityIdDto> reviewsDto = ReviewMapper.MapToReviewsWithActivityIdDto(reviews);
 
-            // Añadir los horarios al objeto respuesta que devuelve la API (que incluye actividad, horarios y opiniones).
+            // Incluir la actividad, los horarios y opiniones al objeto respuesta que devuelve la API.
             List<ActivityDto> activitiesResponseDto = ActivityMapper.MapToResponseActivitiesDto(activitiesDto, activitiesWithSchedules, reviewsDto);
 
             return activitiesResponseDto;
@@ -116,7 +116,7 @@ namespace SPRENCIA.Application.Services
             // Al servicio llega un objeto que se compone de la entidad Activity (con la actividad editada), la entidad Reviews (con las opiniones asociadas a la actividad) y la unión de ActivitiesSchedules y Schedules con la información de los horarios de la actividad modificada.
             ActivityUpdateResponse activityUpdatedResponse = await _activityRepository.Update(activityUpdatedRequestDto);
 
-            // Se extran los tres objetos que están dentro de activityUpdatedResponse.
+            // Se extraen los tres objetos que están dentro de activityUpdatedResponse.
             Activity updatedActivity = activityUpdatedResponse.Activity;
             List<ActivitiesSchedulesSchedules> activitySchedules = activityUpdatedResponse.ActivitySchedulesSchedules;
             List<Review> activityReviews = activityUpdatedResponse.Reviews;

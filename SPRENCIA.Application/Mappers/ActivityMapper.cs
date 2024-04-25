@@ -38,7 +38,6 @@ namespace SPRENCIA.Application.Mappers
                 activityResponseDto.Price = activityDto.Price;
 
                 // MMM Lógica para asignar los horarios a cada actividad.
-
                 // Mapear convertir lista de objetos tipo Activities_Schedules + Schedules en SchedulesDto.
                 List<ScheduleDto> schedulesForActivity = ScheduleMapper.MapToSchedulesDto(activityDto, activitiesShedulesDto);
 
