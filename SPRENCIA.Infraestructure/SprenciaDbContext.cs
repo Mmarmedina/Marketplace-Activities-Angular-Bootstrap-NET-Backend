@@ -13,6 +13,7 @@ namespace SPRENCIA.Infraestructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // optionsBuilder.UseSqlServer("Server=tcp:sprenciaserver.database.windows.net,1433;Initial Catalog=SprenciaDb;Persist Security Info=False;User ID=mmarmedina;Password=sprenciaCodehouse2024@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             optionsBuilder.UseSqlServer("Server=JOSE_MANUEL_M\\SQLEXPRESS; User Id=sa; Password=sql1234maria; Database=SprenciaDb; Trusted_Connection=True; Encrypt=False");
         }
 
