@@ -38,6 +38,20 @@ namespace SPRENCIA_API
             });
 
             // MMM 
+            /* services.AddCors(options =>
+            {
+                options.AddPolicy("NuevaPolítica", app =>
+                {
+                    app.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                    ;
+
+                });
+
+            });*/
+
+            // MMM Como estaba antes.
             services.AddCors(options =>
             {
                 options.AddPolicy("NuevaPolítica", app =>
